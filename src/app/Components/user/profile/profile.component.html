@@ -1,0 +1,57 @@
+<br>
+<i class="fa-solid fa-arrow-left fa-xl" routerLink="/home" style="position: relative;left: 20px;cursor: pointer;"></i>
+<div class="formbold-main-wrapper" style="padding-top: 0% !important;" >
+    <div class="formbold-form-wrapper">
+      <form  [formGroup]="userForm" (submit)="update()">
+        <div class="formbold-form-title">
+          
+          <h2 style="text-align: center; padding-top: 20px;">Profile </h2>
+        </div>
+        <div class="formbold-input-flex" style="margin-top: 60px;">
+          <div>
+            <label for="firstname" class="formbold-form-label">
+              First name
+            </label>
+            <input
+              type="text"
+              name="firstname"
+              id="firstname"
+              class="formbold-form-input"
+              formControlName="firstName"
+              
+            />
+          </div>
+          <div>
+            <label for="lastname" class="formbold-form-label"> Last name </label>
+            <input
+              type="text"
+              name="lastname"
+              id="lastname"
+              class="formbold-form-input"
+              formControlName="lastName"
+            />
+          </div>
+        </div>
+  
+        
+  
+        
+        <div class="formbold-mb-3">
+          <label for="email" class="formbold-form-label">
+            Email </label>
+          <input
+            type="text"
+            name="email"
+            id="email"
+            formControlName="email"
+
+            class="formbold-form-input"
+          />
+        </div>
+
+
+      
+        <div style="text-align: center!important;"><button class="formbold-btn" type="submit"  >Update</button></div>
+      </form>
+    </div>
+  </div>

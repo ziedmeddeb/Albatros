@@ -1,0 +1,48 @@
+<br>
+<i class="fa-solid fa-arrow-left fa-xl" routerLink="/home" style="position: relative;left: 20px;cursor: pointer;"></i>
+<div class="formbold-main-wrapper">
+    <!-- Author: FormBold Team -->
+    <!-- Learn More: https://formbold.com -->
+    <div class="formbold-form-wrapper">
+      
+    
+  
+      <form [formGroup]="passForm" (ngSubmit)="change()" >
+        <div class="formbold-form-title">
+          <h2 class="">Change Password</h2>
+          
+        </div>
+  
+        <div class="formbold-mb-3">
+          <label for="address" class="formbold-form-label">
+            Old Password
+          </label>
+          <input
+            type="password"
+            name="address"
+            id="address"
+            class="formbold-form-input"
+            formControlName="oldPassword"
+          />
+        </div>
+
+        <div class="formbold-mb-3">
+          <label for="address" class="formbold-form-label">
+            New Password
+          </label>
+          <input
+            type="password"
+            name="address"
+            id="address"
+            class="formbold-form-input"
+            formControlName="newPassword"
+          />
+        </div>
+
+  
+        
+  
+        <button class="formbold-btn">Confirm</button>
+      </form>
+    </div>
+  </div>

@@ -1,0 +1,62 @@
+
+  
+  <section class="ftco-section ftco-no-pb">
+     <div class="container">
+        <div class="row">
+         <div class="col-md-12">
+            <div class="search-wrap-1 ">
+               <form action="#" class="search-property-1">
+                  <div class="row no-gutters">
+                   
+         <div class="col-lg d-flex">
+            <div class="form-group p-4">
+               <label for="#">Categorie</label>
+               <div class="form-field">
+                 <div class="select-wrap">
+                  <div class="icon"><span class="fa fa-chevron-down"></span></div>
+                  <select name="" id="" class="form-control" (change)="filter(cat.value)" #cat>
+                     <option value="all" selected>Tous</option>
+                    <option value="S+1" >S+1</option>
+                    <option value="S+2">S+2</option>
+                    
+                </select>
+            </div>
+        </div>
+    </div>
+  </div>
+  
+  </div>
+  </form>
+  </div>
+  </div>
+  </div>
+  </div>
+  </section>
+  
+  <section class="ftco-section">
+     <div class="container">
+      <div class="row">
+         <div class="col-md-4 " *ngFor="let a of listAparts">
+            <div class="project-wrap">
+               <a [routerLink]="['/list',a?._id]" class="img" [style.background-image]="'url(' + a.image + ')'">
+                  <span class="price">{{a.categ}}</span>
+              </a>
+              <div class="text p-4">
+                  <span class="days">7 jours</span>
+                  <h3><a [routerLink]="['/list',a?._id]" style="text-decoration:none;">{{a.name}}</a></h3>
+                  <a class="location" href="https://goo.gl/maps/pG9aEZBunxaM2wBR7" target="_blank" style="text-decoration: none;"><span class="fa fa-map-marker"></span> Hammem Ghazez</a>
+                  <ul>
+                    
+                     <li><span class="flaticon-sun-umbrella"></span>Près de la plage</li>
+                 </ul>
+             </div>
+         </div>
+     </div>
+  
+  </div>
+  
+  </div>
+  </section>
+  
+  
+  

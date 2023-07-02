@@ -1,0 +1,31 @@
+.available {
+    background-color: #76F467;
+  }
+  
+  .not-available {
+    background-color: #F94C46;
+  }
+
+  .green {
+    background-color: #76F467;
+    width:70px;
+    height: 30px;
+    margin: 20px;
+  }
+  
+  .red {
+    background-color: #F94C46;
+    width:70px;
+    height: 30px;
+    margin-left: 40px;
+    margin-right: 20px;
+  }
+  .legende {
+    display: flex;
+    align-items: center;
+  }
+  
+  .tableReserv {
+    margin-top: 60px;
+    margin-bottom: 20px;
+  }

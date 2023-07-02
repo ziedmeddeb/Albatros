@@ -1,0 +1,161 @@
+<div *ngIf="reserve">
+<h1 style="text-align: center;margin: 5%;">Reservations pour {{datede | date:'dd/MM'}}</h1>
+<i class="fa-regular fa-square-plus fa-xl" style="float:right;margin:20px ;cursor: pointer;"
+(click)="show()"></i>
+<div class="table-responsive">
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Cin</th>
+        
+        <th>Telephone</th>
+        <th>Region</th>
+        <th>Actions</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let u of users">
+        <td>{{u.user.firstName}}</td>
+        <td>{{u.user.lastName}}</td>
+        <td>{{u.reser.cin}}</td>
+        
+        <td>{{u.reser.ntel}}</td>
+        <td>{{u.reser.region}}</td>
+        <td><button type="button" class="btn btn-primary" (click)="confirmRes(u.reser._id)">Confirmer</button></td>
+      </tr>
+      
+      
+    </tbody>
+  </table>
+</div>
+
+<div
+  class="formbold-main-wrapper"
+  style="margin-top: 0% !important; width: 97% !important"
+  *ngIf="showForm"
+>
+  <!-- Author: FormBold Team -->
+  <!-- Learn More: https://formbold.com -->
+  <div class="formbold-form-wrapper">
+    <form  [formGroup]="reservForm" (ngSubmit)="reser()">
+      <div class="formbold-form-title">
+        <h2 class="">Réserver</h2>
+        <p> </p>
+      </div>
+
+      <div class="formbold-mb-3">
+        
+        <label for="address" class="formbold-form-label">Prénom </label>
+        <input
+          type="text"
+          name="address"
+          id="address"
+          class="formbold-form-input"
+          formControlName="firstName"
+          
+        />
+      </div>
+
+      <div class="formbold-mb-3">
+        
+        <label for="address" class="formbold-form-label">Nom </label>
+        <input
+          type="text"
+          name="address"
+          id="address"
+          class="formbold-form-input"
+          formControlName="lastName"
+          
+        />
+      </div>
+
+      
+
+      <div class="formbold-mb-3">
+        
+        <label for="address" class="formbold-form-label">CIN </label>
+        <input
+          type="text"
+          name="address"
+          id="address"
+          class="formbold-form-input"
+          formControlName="cin"
+          
+        />
+      </div>
+
+      <div class="formbold-mb-3">
+        
+        <label for="address" class="formbold-form-label">N° Telephone </label>
+        <input
+          type="text"
+          name="address"
+          id="address"
+          class="formbold-form-input"
+          formControlName="ntel"
+          
+        />
+      </div>
+      <div class="formbold-mb-3">
+        
+        <label for="address" class="formbold-form-label">Region </label>
+        <input
+          type="text"
+          name="address"
+          id="address"
+          class="formbold-form-input"
+          formControlName="region"
+          
+        />
+      </div>
+
+      
+
+      <button
+        class="formbold-btn"
+        type="submit"
+        style="background-color: rgb(147, 147, 255)"
+      >
+        Confirm
+      </button>
+    </form>
+  </div>
+</div>
+</div>
+
+<div *ngIf="reserve1">
+<h1 style="text-align: center;margin: 5%;">Reservé pour  </h1>
+
+<p>Prénom : {{users[0]?.user.firstName}}</p>
+
+         <p>Nom : {{users[0]?.user.lastName}}</p>
+        <p> Cin : {{users[0]?.reser.cin}}</p>
+         <p>email : {{users[0]?.user.email}}</p>
+         <p>Telephone : {{users[0]?.reser.ntel}}</p>
+        <p> Region : {{users[0]?.reser.region}}</p>
+        <input [value]="users[0]?.reser.remarque">
+<br>
+
+        <button type="button" class="btn btn-danger" (click)="annuler()">Annuler</button>
+    </div>
+
+
+    <div *ngIf="adminres">
+      <h1 style="text-align: center;margin: 5%;">Reservé pour  </h1>
+      
+      <p>Prénom : {{user?.firstName}}</p>
+      
+               <p>Nom : {{user?.lastName}}</p>
+              <p> Cin : {{user?.cin}}</p>
+               
+               <p>Telephone : {{user?.ntel}}</p>
+              <p> Region : {{user?.region}}</p>
+      
+              <input [value]="user?.remarque">
+              <br>
+              <button type="button" class="btn btn-danger" (click)="annuler1()">Annuler</button>
+              
+          </div>

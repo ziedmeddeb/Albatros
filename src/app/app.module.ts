@@ -1,41 +1,63 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './components/login/login.component';
-import { ErrorComponent } from './components/error/error.component';
-import { AccueilEmployeComponent } from './components/accueil-employe/accueil-employe.component';
-import { ContactEmployeComponent } from './components/contact-employe/contact-employe.component';
-import { DashDirecteurComponent } from './components/dash-directeur/dash-directeur.component';
-import { DashboardEmployeComponent } from './components/dashboard-employe/dashboard-employe.component';
-import { HomeComponent } from './components/home/home.component';
-import { MenuComponent } from './components/menu/menu.component';
-import { MenuEmployeComponent } from './components/menu-employe/menu-employe.component';
-import { PresentationComponent } from './components/presentation/presentation.component';
+import { UserComponent } from './layouts/user/user.component';
+import { ContactComponent } from './Components/user/contact/contact.component';
+
+import { ListAppartsComponent } from './Components/user/list-apparts/list-apparts.component';
+import { AboutComponent } from './Components/user/about/about.component';
+import { HttpClientModule } from '@angular/common/http';
+import { SelectedApartComponent } from './Components/user/selected-apart/selected-apart.component';
+
+import { RegisterComponent } from './Components/user/register/register.component';
+import { LoginComponent } from './Components/user/login/login.component';
+import { ErrorPageComponent } from './Components/user/error-page/error-page.component';
+import { ProfileComponent } from './Components/user/profile/profile.component';
+import { ChangePassComponent } from './Components/user/change-pass/change-pass.component';
+import { LoginAdminComponent } from './Components/admin/login-admin/login-admin.component';
+import { AdminComponent } from './layouts/admin/admin.component';
+import { ListApartComponent } from './Components/admin/list-apart/list-apart.component';
+import { AdminSelectedApartComponent } from './Components/admin/admin-selected-apart/admin-selected-apart.component';
+import { ListReserComponent } from './Components/admin/list-reser/list-reser.component';
+
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    UserComponent,
+    ContactComponent,
+ 
+    ListAppartsComponent,
+    AboutComponent,
+    SelectedApartComponent,
+    RegisterComponent,
     LoginComponent,
-    ErrorComponent,
-    AccueilEmployeComponent,
-    ContactEmployeComponent,
-    DashDirecteurComponent,
-    DashboardEmployeComponent,
-    HomeComponent,
-    MenuComponent,
-    MenuEmployeComponent,
-    PresentationComponent
+    ErrorPageComponent,
+    ProfileComponent,
+    ChangePassComponent,
+    LoginAdminComponent,
+    AdminComponent,
+    ListApartComponent,
+    AdminSelectedApartComponent,
+    ListReserComponent
+ 
+    
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+   
+    ReactiveFormsModule,
+    HttpClientModule,
+    FormsModule
+   
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,28 @@
+
+<h1 style="margin-bottom: 20px;;">Reservations du {{dateDeb |date:'dd-MM'}} au {{dateFin |date:'dd-MM'}} </h1>
+<br>
+<div class="table-responsive">
+<table class="table">
+    <thead>
+      <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Cin</th>
+        
+        <th>Telephone</th>
+        <th>Region</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let r of listReserv">
+        <td>{{r.firstName}}</td>
+        <td>{{r.lastName}}</td>
+        <td>{{r.cin}}</td>
+        
+        <td>{{r.ntel}}</td>
+        <td>{{r.region}}</td>
+      </tr>
+      
+    </tbody>
+  </table>
+  </div>

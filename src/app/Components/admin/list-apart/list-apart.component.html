@@ -1,0 +1,35 @@
+<div>
+    <div class="legende" style="margin-top: 60px;">
+    <div class="green"></div> Disponible
+    
+      <div class="red"></div> Non Disponible
+    
+    </div>
+    <div class="table-responsive">
+    <table class="table table-bordered" style="border:1px solid black">
+      <thead>
+        <tr>
+          <th style="border:1px solid black"></th>
+          <th *ngFor="let c of availabilities " style="border:1px solid black;cursor: pointer;"
+          [routerLink]="['../listReser',c?.dateDeb,c?.dateFin]"
+          >{{c?.dateDeb | date:'dd-MM'}} au {{c?.dateFin | date:'dd-MM'}}</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let a of calenders">
+          <td style="border: 1px solid black">{{ a?.appartement.code }}</td>
+          <ng-container *ngFor="let availability of a.calendrier.availabilities">
+            <td
+              class="boxInfo"
+              [ngClass]="{ 'available': availability.available, 'not-available': !availability.available }"
+              style="border: 1px solid black; cursor: pointer;"
+             [routerLink]="['../adminSelectedApart',a?.appartement._id,availability.dateDeb,availability._id]"
+            >
+            {{availability.price}}
+            </td>
+          </ng-container>
+        </tr>
+      </tbody>
+    </table>
+    </div>
