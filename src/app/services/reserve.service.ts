@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-const url="http://localhost:5000/api/reservations/"
+const url="https://albatros-backend.onrender.com/api/reservations/"
 @Injectable({
   providedIn: 'root'
 })
@@ -19,8 +19,8 @@ export class ReserveService {
   getReserveByApartIdAndDate(id:string,date:any):Observable<any>{
     return this.http.get<any>(url+"apart/"+id+"/date/"+date);
   }
-  updateReserve(id:string){
-    return this.http.put<any>(url+"update/"+id,{});
+  updateReserve(id:string,status:string,remarque:string){
+    return this.http.put<any>(url+"update/"+id+"/"+status+"/"+remarque,{});
   }
   annulerReserv(id:string){
     return this.http.put<any>(url+"annuler/"+id,{});

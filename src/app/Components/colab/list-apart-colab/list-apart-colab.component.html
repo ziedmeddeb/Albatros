@@ -1,16 +1,16 @@
 <div>
     <div class="legende" style="margin-top: 60px;">
-    <div class="green"></div> Disponible
+    <div class="green legend-item"></div> Disponible
     
       
 
-      <div class="orange"></div> En cours
+      <div class="orange legend-item"></div> En cours
 
-      <div class="red"></div> Payé
+      <div class="red legend-item" ></div> Payé
 
-      <div class="cyan"></div> Avance
+      <div class="cyan legend-item"></div> Avance
 
-      <div class="black"></div> Amicale
+      <div class="black legend-item"></div> Amicale
 
     
     </div>
@@ -21,8 +21,8 @@
           
           <th style="border:1px solid black"></th>
           <th style="border: 1px solid black">Description</th>
-          <th *ngFor="let c of availabilities " style="border:1px solid black;cursor: pointer;"
-          [routerLink]="['../listReser',c?.dateDeb,c?.dateFin]"
+          <th *ngFor="let c of availabilities " style="border:1px solid black;"
+          
           >{{c?.dateDeb | date:'dd-MM'}} au {{c?.dateFin | date:'dd-MM'}}</th>
           
           
@@ -42,12 +42,14 @@
               'paid': availability.status === 'Payé',
               'in-progress': availability.status === 'En cours',
               'amicale': availability.status === 'Amicale',
-              'avance': availability.status === 'Avance'}"
+              'avance': availability.status === 'Avance',
+            'not-mine' : availability.persId !== '' && availability.persId !== colaborateur  }"
               style="border: 1px solid black; cursor: pointer;"
-             [routerLink]="['../adminSelectedApart',a?.appartement._id,availability.dateDeb,availability._id]"
+              
+             [routerLink]="['../colabApart',a?.appartement._id,availability.dateDeb,availability._id]"
             >
-            <span *ngIf="availability.nom != ''"> {{availability.nom}}</span>
-            <span *ngIf="availability.nom == ''">{{availability.price}}</span>
+            <span *ngIf="availability.persId == colaborateur && availability.nom != ''"> {{availability.nom}}</span>
+            <span *ngIf="availability.nom == ''"> {{availability.price}}   </span>
             </td>
           </ng-container>
         </tr>

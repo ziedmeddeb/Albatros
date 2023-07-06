@@ -15,6 +15,10 @@ import { AdminComponent } from './layouts/admin/admin.component';
 import { ListApartComponent } from './Components/admin/list-apart/list-apart.component';
 import { AdminSelectedApartComponent } from './Components/admin/admin-selected-apart/admin-selected-apart.component';
 import { ListReserComponent } from './Components/admin/list-reser/list-reser.component';
+import { LoginColabComponent } from './Components/colab/login-colab/login-colab.component';
+import { RegisterColabComponent } from './Components/colab/register-colab/register-colab.component';
+import { ListApartColabComponent } from './Components/colab/list-apart-colab/list-apart-colab.component';
+import { SelectedApartColabComponent } from './Components/colab/selected-apart-colab/selected-apart-colab.component';
 
 
 
@@ -35,7 +39,7 @@ const routes: Routes = [
   {path:'register',component:RegisterComponent,title:'Register'},
   {path:'profile',component:ProfileComponent,title:'Profile'},
   {path:'changePass',component:ChangePassComponent,title:'Changer mot de passe'},
-  {path:'admin',component:LoginAdminComponent,title:'Admin'},
+  {path:'adminlog',component:LoginAdminComponent,title:'Admin'},
   
   
  
@@ -49,6 +53,11 @@ const routes: Routes = [
   
   
 ]},
+
+{path:'colabLogin',component:LoginColabComponent,title:'Login'},
+{path:'colabRegister',component:RegisterColabComponent,title:'Register'},
+{path:'colabdash',component:ListApartColabComponent,title:'Colaborateur Dashboard'},
+{path:'colabApart/:id/:calender/:idCal',component:SelectedApartColabComponent,title:'Appartement'},
 {path:'**',redirectTo:'home',pathMatch:'full'}
 
   

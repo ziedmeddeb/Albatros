@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { CalendrierService } from 'src/app/services/calendrier.service';
 import { ReserveService } from 'src/app/services/reserve.service';
 import { UserService } from 'src/app/services/user.service';
@@ -19,7 +20,11 @@ export class AdminSelectedApartComponent implements OnInit {
   reserve1 = false;
   adminres = false;
   reservForm!: FormGroup;
+  modifForm!: FormGroup;
+  modifFormAdmin!: FormGroup;
   user: any;
+  person:any;
+  jwt=new JwtHelperService(); 
 
   users: any[] = [];
   reservations: any[] = [];
@@ -42,7 +47,7 @@ export class AdminSelectedApartComponent implements OnInit {
       .subscribe((data) => {
         this.reservations = data;
         const confirmedReservations = this.reservations.filter(
-          (elt) => elt.status == 'confirmé'
+          (elt) => ['En cours', 'Payé', 'Avance', 'Amicale'].includes(elt.status)
         );
         console.log(confirmedReservations);
        
@@ -56,6 +61,10 @@ export class AdminSelectedApartComponent implements OnInit {
                 this.reserve = false;
                 this.adminres = false;
                 this.reserve1 = true;
+                this.modifForm = this.fb.group({
+                  status: [this.users[0].reser.status],
+                  remarque:[this.users[0].reser.remarque]
+                });
               });
             }
             else{
@@ -64,6 +73,13 @@ export class AdminSelectedApartComponent implements OnInit {
               this.reserve1 = false;
               this.reserve = false;
                 this.adminres = true;
+
+               
+
+                this.modifFormAdmin = this.fb.group({
+                  status: [this.user.status],
+                  remarque:[this.user.remarque]
+                });
             }
           } else {
             this.reservations.forEach((element) => {
@@ -80,20 +96,31 @@ export class AdminSelectedApartComponent implements OnInit {
       lastName: [''],
       cin: [''],
       ntel: [''],
-      region: ['']
+      region: [''],
+      status: ['']
     });
+
+    
+
+    
+
   }
 
   confirmRes(id: string) {
+    this.serviceUser.getUserById(id).subscribe((data) => {
     this.calendService
-      .updateCalendrierBydate(this.idApart, this.idCal)
+      .updateCalendrierBydate(this.idApart, this.idCal,"En cours",
+      this.jwt.decodeToken(localStorage.getItem('adminToken')!)._id,"admin",
+       data.firstName + ' ' + data.lastName)
       .subscribe((data) => {
         console.log(data);
-        this.serviceRes.updateReserve(id).subscribe((data) => {
-          console.log(data);
+        
+        this.serviceRes.updateReserve(id,"En cours","Aucune").subscribe((data) => {
+          window.location.reload();
         });
-        window.location.reload();
+        
       });
+    });
   }
 
   show() {
@@ -102,10 +129,10 @@ export class AdminSelectedApartComponent implements OnInit {
 
   annuler() {
     this.calendService
-      .updateCalendrierBydate2(this.idApart, this.idCal)
+      .updateCalendrierBydate2(this.idApart, this.idCal,"annulé")
       .subscribe((data) => {
         this.serviceRes.annulerReserv(this.users[0].reser._id).subscribe((data) => {
-          console.log(data);
+          
         });
         this.reserve1 = false;
         this.adminres = false;
@@ -123,36 +150,71 @@ export class AdminSelectedApartComponent implements OnInit {
         cin: this.reservForm.value.cin,
         region: this.reservForm.value.region,
         ntel: this.reservForm.value.ntel,
-        date: this.datede
+        date: this.datede,
+        status:this.reservForm.value.status,
+        nom:"Chokri Meddeb"
       })
       .subscribe((data) => {
         this.user = this.reservForm.value;
-        this.serviceRes.updateReserve(data._id).subscribe((data1) => {
-          this.adminres = true;
+        console.log(this.jwt.decodeToken(localStorage.getItem('adminToken')!)._id);
           this.calendService
-            .updateCalendrierBydate(this.idApart, this.idCal)
+            .updateCalendrierBydate(this.idApart, this.idCal,this.reservForm.value.status,
+            this.jwt.decodeToken(localStorage.getItem('adminToken')!)._id,"admin",
+            this.reservForm.value.firstName + ' ' + this.reservForm.value.lastName)
             .subscribe((data) => {
-              console.log(data);
-              window.location.reload();
+              console.log(this.jwt.decodeToken(localStorage.getItem('adminToken')!)._id);
+              // console.log(data);
+               window.location.reload();
             });
         });
         
-      });
+      
       
   }
 
 
   annuler1() {
     this.calendService
-      .updateCalendrierBydate2(this.idApart, this.idCal)
+      .updateCalendrierBydate2(this.idApart, this.idCal,"annulé")
       .subscribe((data) => {
         this.serviceRes.annulerReserv(this.user._id).subscribe((data) => {
-          console.log(data);
-          this.adminres = false;
+          
+          
+        });
+        this.adminres = false;
         this.reserve1 = false;
         this.reserve = true;
-        });
+        
+      });
+  }
+
+
+  modif()
+  {
+    
+    this.serviceRes.updateReserve(this.users[0].reser._id,this.modifForm.value.status,this.modifForm.value.remarque).subscribe((data) => {
+      this.calendService
+      .updateCalendrierBydate(this.idApart, this.idCal,this.modifForm.value.status,
+        this.jwt.decodeToken(localStorage.getItem('adminToken')!)._id,"admin",
+        this.reservForm.value.firstName + ' ' + this.reservForm.value.lastName)
+      .subscribe((data) => {
         window.location.reload();
       });
+    });
+  }
+
+  modifadmin()
+  {
+    
+    this.serviceRes.updateReserve(this.user._id,this.modifFormAdmin.value.status,this.modifFormAdmin.value.remarque).subscribe((data) => {
+      this.calendService
+      .updateCalendrierBydate(this.idApart, this.idCal,this.modifFormAdmin.value.status,
+        this.jwt.decodeToken(localStorage.getItem('adminToken')!)._id,"admin",
+        this.reservForm.value.firstName + ' ' + this.reservForm.value.lastName)
+      .subscribe((data) => {
+        console.log(data);
+        window.location.reload();
+      });
+    });
   }
 }

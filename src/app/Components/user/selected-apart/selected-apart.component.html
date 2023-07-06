@@ -33,7 +33,7 @@
       <!-- Product Description -->
       <div class="product-description">
         <span>Appartement</span>
-        <h1>{{Apart?.name}}</h1>
+        <h1>{{Apart?.code}} : {{Apart?.name}}</h1>
         <p>{{Apart?.description}}</p>
       </div>
 
@@ -69,6 +69,7 @@
   <div class="red"></div> Non Disponible
 
 </div>
+Choisissez une date pour reserver 
 <div class="table-responsive">
 <table class="table table-bordered" style="border:1px solid black">
   <thead>
@@ -88,6 +89,7 @@
      [ngClass]="{'available': c.available, 'not-available': !c.available}"
       style="border:1px solid black;cursor: pointer;" (click)="show(c)" 
       (click)="onBoxClick($event)"
+      
       > </td>
       
     </tr>

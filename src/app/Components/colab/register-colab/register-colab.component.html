@@ -1,0 +1,83 @@
+<!-- Section: Design Block -->
+<section class="text-center text-lg-start">
+    <!-- Jumbotron -->
+    <div class="container py-4">
+      <div class="row align-items-lg-center">
+        <div class="col-lg-6 mb-5 mb-lg-0">
+          <div class="card bg-transparent">
+            <div class="card-body p-5 shadow-5 text-center">
+              <h2 class="fw-bold mb-5">Créer un compte</h2>
+              <form [formGroup]="colabForm" (ngSubmit)="creer()">
+                <div class="row mb-4">
+                  <div class="col-md-6">
+                    <div class="form-outline">
+                      <label class="form-label" for="form3Example1">Prénom</label>
+                      <input type="text" id="form3Example1" class="form-control" formControlName="firstName" />
+                      <div class="invalid-feedback opa">
+                        <ng-container>
+                          Allergies Are Required
+                        </ng-container>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-outline">
+                      <label class="form-label" for="form3Example6">Nom</label>
+                      <input type="text" id="form3Example6" class="form-control" formControlName="lastName" />
+                      <div class="invalid-feedback opa">
+                        <ng-container>
+                          BloodType Is Required
+                        </ng-container>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Email input -->
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="form3Example3">Identifiant</label>
+                  <input type="email" id="form3Example3" class="form-control" formControlName="identifiant" />
+                  <div class="invalid-feedback opa">
+                    <ng-container>
+                      Email Is Required
+                    </ng-container>
+                    <ng-container>
+                      Invalid Email Format
+                    </ng-container>
+                  </div>
+                </div>
+  
+                <!-- Password input -->
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="form3Example4">Password</label>
+                  <input type="password" id="form3Example4" class="form-control" formControlName="password" />
+                  <div class="invalid-feedback opa">
+                    <ng-container>
+                      Password Is Required
+                    </ng-container>
+                  </div>
+                </div>
+  
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-primary btn-block mb-4">
+                  Créer compte
+                </button>
+  
+                <!-- Register buttons -->
+                <div class="text-center">
+                  Vous n'avez pas de compte?
+                  <a routerLink="/login" style="text-decoration: underline;color:blue;cursor: pointer;">S'authentifier</a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+  
+        <div class="col-lg-6 text-center">
+          <img src="../../../../assets/images/albatros.jpeg" class="img-fluid rounded-4 shadow-4" alt="" />
+        </div>
+      </div>
+    </div>
+    <!-- Jumbotron -->
+  </section>
+  <!-- Section: Design Block -->
+  

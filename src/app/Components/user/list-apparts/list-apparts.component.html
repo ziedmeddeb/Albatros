@@ -8,12 +8,12 @@
                <form action="#" class="search-property-1">
                   <div class="row no-gutters">
                    
-         <div class="col-lg d-flex">
-            <div class="form-group p-4">
+         <div >
+           
                <label for="#">Categorie</label>
-               <div class="form-field">
+               
                  <div class="select-wrap">
-                  <div class="icon"><span class="fa fa-chevron-down"></span></div>
+                  
                   <select name="" id="" class="form-control" (change)="filter(cat.value)" #cat>
                      <option value="all" selected>Tous</option>
                     <option value="S+1" >S+1</option>
@@ -21,9 +21,9 @@
                     
                 </select>
             </div>
-        </div>
+        
     </div>
-  </div>
+ 
   
   </div>
   </form>
@@ -43,7 +43,7 @@
               </a>
               <div class="text p-4">
                   <span class="days">7 jours</span>
-                  <h3><a [routerLink]="['/list',a?._id]" style="text-decoration:none;">{{a.name}}</a></h3>
+                  <h3><a [routerLink]="['/list',a?._id]" style="text-decoration:none;">{{a.code}} : {{a.name}}</a></h3>
                   <a class="location" href="https://goo.gl/maps/pG9aEZBunxaM2wBR7" target="_blank" style="text-decoration: none;"><span class="fa fa-map-marker"></span> Hammem Ghazez</a>
                   <ul>
                     

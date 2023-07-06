@@ -112,6 +112,30 @@
         />
       </div>
 
+      <div class="formbold-mb-3">
+        
+        <label for="address" class="formbold-form-label">Etat </label>
+        <label>
+          <input name="status" type="radio" value="Amicale" formControlName="status">
+          Amicale
+        </label>
+      
+        <label>
+          <input name="status" type="radio" value="Avance" formControlName="status">
+          Avance
+        </label>
+      
+        <label>
+          <input name="status" type="radio" value="Payé" formControlName="status">
+          Payé
+        </label>
+
+        <label>
+          <input name="status" type="radio" value="En cours" formControlName="status">
+          En cours
+        </label>
+      </div>
+
       
 
       <button
@@ -133,18 +157,60 @@
 
          <p>Nom : {{users[0]?.user.lastName}}</p>
         <p> Cin : {{users[0]?.reser.cin}}</p>
-         <p>email : {{users[0]?.user.email}}</p>
+         
          <p>Telephone : {{users[0]?.reser.ntel}}</p>
         <p> Region : {{users[0]?.reser.region}}</p>
-        <input [value]="users[0]?.reser.remarque">
+        <p>Etat : {{users[0]?.reser.status}}</p>
+<form [formGroup]="modifForm" (ngSubmit)="modif()">
+  <div class="formbold-mb-3">
+    <label for="address" class="formbold-form-label">Etat</label>
+    
+    <label>
+      <input name="status" type="radio" value="Amicale" formControlName="status">
+      Amicale
+    </label>
+  
+    <label>
+      <input name="status" type="radio" value="Avance" formControlName="status">
+      Avance
+    </label>
+  
+    <label>
+      <input name="status" type="radio" value="Payé" formControlName="status">
+      Payé
+    </label>
+
+    <label>
+      <input name="status" type="radio" value="En cours" formControlName="status">
+      En cours
+    </label>
+
+    
+  </div>
+  <label for="address" class="formbold-form-label">Remarque</label>
+  <label>
+    
+    <input type="text"  formControlName="remarque">
+    
+  </label>
+  <br>
+
+
+        <button type="button" type="submit" class="btn btn-success" >Modifier</button>
+      </form>
+
+        
 <br>
 
         <button type="button" class="btn btn-danger" (click)="annuler()">Annuler</button>
+        
     </div>
 
 
     <div *ngIf="adminres">
-      <h1 style="text-align: center;margin: 5%;">Reservé pour  </h1>
+     
+      <p>Reservé par : {{user?.nom}} </p>
+      <h3 style="text-align: center;margin: 5%;">Reservé pour  </h3>
       
       <p>Prénom : {{user?.firstName}}</p>
       
@@ -153,9 +219,44 @@
                
                <p>Telephone : {{user?.ntel}}</p>
               <p> Region : {{user?.region}}</p>
-      
-              <input [value]="user?.remarque">
+              <p>Etat : {{user?.status}}</p>
+              <form [formGroup]="modifFormAdmin" (ngSubmit)="modifadmin()">
+
+                <div class="formbold-mb-3">
+                  <label for="address" class="formbold-form-label">Etat</label>
+                  
+                  <label>
+                    <input name="status" type="radio" value="Amicale" formControlName="status">
+                    Amicale
+                  </label>
+                
+                  <label>
+                    <input name="status" type="radio" value="Avance" formControlName="status">
+                    Avance
+                  </label>
+                
+                  <label>
+                    <input name="status" type="radio" value="Payé" formControlName="status">
+                    Payé
+                  </label>
+
+                  <label>
+                    <input name="status" type="radio" value="En cours" formControlName="status">
+                    En cours
+                  </label>
+                  
+                </div>
+                <label for="address" class="formbold-form-label">Remarque</label>
+                <label>
+                  
+                  <input type="text"  formControlName="remarque">
+                  
+                </label><br>
+                <button type="button" type="submit" class="btn btn-success">Modifier</button>
+               </form> 
+              
               <br>
               <button type="button" class="btn btn-danger" (click)="annuler1()">Annuler</button>
+             
               
           </div>

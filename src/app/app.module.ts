@@ -22,6 +22,10 @@ import { AdminComponent } from './layouts/admin/admin.component';
 import { ListApartComponent } from './Components/admin/list-apart/list-apart.component';
 import { AdminSelectedApartComponent } from './Components/admin/admin-selected-apart/admin-selected-apart.component';
 import { ListReserComponent } from './Components/admin/list-reser/list-reser.component';
+import { RegisterColabComponent } from './Components/colab/register-colab/register-colab.component';
+import { LoginColabComponent } from './Components/colab/login-colab/login-colab.component';
+import { ListApartColabComponent } from './Components/colab/list-apart-colab/list-apart-colab.component';
+import { SelectedApartColabComponent } from './Components/colab/selected-apart-colab/selected-apart-colab.component';
 
 
 
@@ -44,7 +48,11 @@ import { ListReserComponent } from './Components/admin/list-reser/list-reser.com
     AdminComponent,
     ListApartComponent,
     AdminSelectedApartComponent,
-    ListReserComponent
+    ListReserComponent,
+    RegisterColabComponent,
+    LoginColabComponent,
+    ListApartColabComponent,
+    SelectedApartColabComponent
  
     
 

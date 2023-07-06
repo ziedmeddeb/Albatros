@@ -7,6 +7,8 @@ export class Reserve {
         public cin:string,
         public region:string,
         public ntel:string,
-        public remarque:string
+        public remarque:string,
+        public status:string,
+        public nom:string
     ) { }
 }

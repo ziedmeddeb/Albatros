@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Calendrier } from '../entities/calendrier';
-const url="http://localhost:5000/api/calendrier/"
+const url="https://albatros-backend.onrender.com/api/calendrier/"
 @Injectable({
   providedIn: 'root'
 })
@@ -22,12 +22,12 @@ export class CalendrierService {
     return this.http.put<any>(url+"update/"+id,data);
   }
 
-  updateCalendrierBydate(idApart:string,idDate:string){
-    return this.http.put<any>(url+"update/"+idApart+"/"+idDate,{});
+  updateCalendrierBydate(idApart:string,idDate:string,status:string,persId:any,role:any,nom:string){
+    return this.http.put<any>(url+"update/"+idApart+"/"+idDate+"/"+status+"/"+persId+"/"+role+"/"+nom,{});
   }
 
-  updateCalendrierBydate2(idApart:string,idDate:string){
-    return this.http.put<any>(url+"update2/"+idApart+"/"+idDate,{});
+  updateCalendrierBydate2(idApart:string,idDate:string,status:string){
+    return this.http.put<any>(url+"update2/"+idApart+"/"+idDate+"/"+status,{});
   }
 
   

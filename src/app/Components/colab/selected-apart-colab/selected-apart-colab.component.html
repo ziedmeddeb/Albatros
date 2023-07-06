@@ -1,0 +1,171 @@
+<br>
+<i class="fa-solid fa-arrow-left fa-xl" routerLink="/colabdash" style="position: relative;left: 20px;cursor: pointer;"></i>
+
+<div
+  class="formbold-main-wrapper"
+  style="margin-top: 0% !important; width: 97% !important"
+  *ngIf="showForm"
+>
+  <!-- Author: FormBold Team -->
+  <!-- Learn More: https://formbold.com -->
+  <div class="formbold-form-wrapper">
+    <form  [formGroup]="reservForm" (ngSubmit)="reser()">
+      <div class="formbold-form-title">
+        <h2 class="">Réserver</h2>
+        <p> </p>
+      </div>
+
+      <div class="formbold-mb-3">
+        
+        <label for="address" class="formbold-form-label">Prénom </label>
+        <input
+          type="text"
+          name="address"
+          id="address"
+          class="formbold-form-input"
+          formControlName="firstName"
+          
+        />
+      </div>
+
+      <div class="formbold-mb-3">
+        
+        <label for="address" class="formbold-form-label">Nom </label>
+        <input
+          type="text"
+          name="address"
+          id="address"
+          class="formbold-form-input"
+          formControlName="lastName"
+          
+        />
+      </div>
+
+      
+
+      <div class="formbold-mb-3">
+        
+        <label for="address" class="formbold-form-label">CIN </label>
+        <input
+          type="text"
+          name="address"
+          id="address"
+          class="formbold-form-input"
+          formControlName="cin"
+          
+        />
+      </div>
+
+      <div class="formbold-mb-3">
+        
+        <label for="address" class="formbold-form-label">N° Telephone </label>
+        <input
+          type="text"
+          name="address"
+          id="address"
+          class="formbold-form-input"
+          formControlName="ntel"
+          
+        />
+      </div>
+      <div class="formbold-mb-3">
+        
+        <label for="address" class="formbold-form-label">Region </label>
+        <input
+          type="text"
+          name="address"
+          id="address"
+          class="formbold-form-input"
+          formControlName="region"
+          
+        />
+      </div>
+
+      <div class="formbold-mb-3">
+        
+        <label for="address" class="formbold-form-label">Etat </label>
+        <label>
+          <input name="status" type="radio" value="Amicale" formControlName="status">
+          Amicale
+        </label>
+      
+        <label>
+          <input name="status" type="radio" value="Avance" formControlName="status">
+          Avance
+        </label>
+      
+        <label>
+          <input name="status" type="radio" value="Payé" formControlName="status">
+          Payé
+        </label>
+
+        <label>
+          <input name="status" type="radio" value="En cours" formControlName="status">
+          En cours
+        </label>
+      </div>
+
+      
+
+      <button
+        class="formbold-btn"
+        type="submit"
+        style="background-color: rgb(147, 147, 255)"
+      >
+        Confirm
+      </button>
+    </form>
+  </div>
+</div>
+
+<div *ngIf="adminres">
+    <h1 style="text-align: center;margin: 5%;">Reservé pour  </h1>
+    
+    <p>Prénom : {{user?.firstName}}</p>
+    
+             <p>Nom : {{user?.lastName}}</p>
+            <p> Cin : {{user?.cin}}</p>
+             
+             <p>Telephone : {{user?.ntel}}</p>
+            <p> Region : {{user?.region}}</p>
+            <p>Etat : {{user?.status}}</p>
+            <form [formGroup]="modifFormAdmin" (ngSubmit)="modifadmin()">
+
+              <div class="formbold-mb-3">
+                <label for="address" class="formbold-form-label">Etat</label>
+                
+                <label>
+                  <input name="status" type="radio" value="Amicale" formControlName="status">
+                  Amicale
+                </label>
+              
+                <label>
+                  <input name="status" type="radio" value="Avance" formControlName="status">
+                  Avance
+                </label>
+              
+                <label>
+                  <input name="status" type="radio" value="Payé" formControlName="status">
+                  Payé
+                </label>
+
+                <label>
+                  <input name="status" type="radio" value="En cours" formControlName="status">
+                  En cours
+                </label>
+                
+              </div>
+              <label for="address" class="formbold-form-label">Remarque</label>
+              <label>
+                
+                <input type="text"  formControlName="remarque">
+                
+              </label><br>
+              <button type="button" type="submit" class="btn btn-success">Modifier</button>
+             </form> 
+            
+            <br>
+            <button type="button" class="btn btn-danger" (click)="annuler1()">Annuler</button>
+           
+            
+        </div>
