@@ -18,7 +18,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class SelectedApartComponent implements OnInit {
   idAp!:string;
-  Apart!:Appartements;
+  Apart:any;
   images!:Image[];
   calender!:Calendrier;
   showForm=false;
@@ -60,12 +60,14 @@ export class SelectedApartComponent implements OnInit {
     
       this.reservForm=this.fb.nonNullable.group({
         cin:[''],
-        region:[''],
+        
         ntel:['']
       });
 
 
     
+    
+
     
   }
 
@@ -80,8 +82,8 @@ export class SelectedApartComponent implements OnInit {
   {
     if(localStorage.getItem('userToken')!=null)
     {
-      if(this.reservForm.value.cin.length!=8 || this.reservForm.value.ntel.length!=8
-         || this.reservForm.value.region.length==0 )
+      if( this.reservForm.value.ntel.length!=8
+          )
          {
             alert("verifier les champs");
             
@@ -93,7 +95,7 @@ export class SelectedApartComponent implements OnInit {
           
       this.reserveService.createReserve({cin:this.reservForm.value.cin,
         firstName:this.user.firstName,lastName:this.user.lastName,
-        region:this.reservForm.value.region,ntel:this.reservForm.value.ntel,
+        region:"",ntel:this.reservForm.value.ntel,
         date:this.selectedCell.dateDeb,
         appartement:this.idAp,user:this.jwt.decodeToken(localStorage.getItem('userToken')!)['_id']}).subscribe(data=>{
         

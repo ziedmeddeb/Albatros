@@ -21,6 +21,14 @@ export class UserComponent implements OnInit {
     }
   }
 
+  closeMenu() {
+    // Find the navbar-toggler button and click it to close the menu
+    const navbarToggler = document.querySelector('.navbar-toggler');
+    if (navbarToggler) {
+      (navbarToggler as HTMLElement).click();
+    }
+  }
+
   Disconnect()
   {
     localStorage.removeItem('userToken');

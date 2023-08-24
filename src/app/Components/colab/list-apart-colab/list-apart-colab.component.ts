@@ -56,6 +56,10 @@ export class ListApartColabComponent implements OnInit {
         });
     });
   }
+  disconnect(){
+    localStorage.removeItem('colabToken');
+    this.router.navigate(['/colabLogin']);
+  }
 
  
   

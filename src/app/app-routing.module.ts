@@ -19,6 +19,8 @@ import { LoginColabComponent } from './Components/colab/login-colab/login-colab.
 import { RegisterColabComponent } from './Components/colab/register-colab/register-colab.component';
 import { ListApartColabComponent } from './Components/colab/list-apart-colab/list-apart-colab.component';
 import { SelectedApartColabComponent } from './Components/colab/selected-apart-colab/selected-apart-colab.component';
+import { SiteArchComponent } from './Components/user/site-arch/site-arch.component';
+import { LoisirComponent } from './Components/user/loisir/loisir.component';
 
 
 
@@ -29,6 +31,8 @@ const routes: Routes = [
     {path:'contact',component:ContactComponent,title:'Contact'},
     {path:'home',component:ListAppartsComponent,title:'List Appartements'},
     {path:'list/:id',component:SelectedApartComponent,title:'Selected Appartement'},
+    {path:'siteArcheologiques',component:SiteArchComponent,title:'Sites archéologiques'},
+    {path:'zonesLoisir',component:LoisirComponent,title:'Zone de loisirs'},
     
     {path:'',redirectTo:'home',pathMatch:'full'}
     
@@ -44,20 +48,19 @@ const routes: Routes = [
   
  
   
-  {path:'admindash',component:AdminComponent,title:'Admin Dashboard',children:
-[
-  {path:'listAparts',component:ListApartComponent,title:'List Appartements'},
-  {path:'adminSelectedApart/:id/:calender/:idCal',component:AdminSelectedApartComponent,title:'Selected Appartement'},
+  
+  {path:'admindash',component:ListApartComponent,title:'List Appartements'},
+  {path:'adminSelectedApart/:id/:calender/:idCal/:dateFin/:cod',component:AdminSelectedApartComponent,title:'Selected Appartement'},
   {path:'listReser/:dateDeb/:dateFin', component:ListReserComponent,title:'List Reservations'},
-  {path:'',redirectTo:'listAparts',pathMatch:'full'},
   
   
-]},
+  
+
 
 {path:'colabLogin',component:LoginColabComponent,title:'Login'},
 {path:'colabRegister',component:RegisterColabComponent,title:'Register'},
 {path:'colabdash',component:ListApartColabComponent,title:'Colaborateur Dashboard'},
-{path:'colabApart/:id/:calender/:idCal',component:SelectedApartColabComponent,title:'Appartement'},
+{path:'colabApart/:id/:calender/:idCal/:dateFin/:cod',component:SelectedApartColabComponent,title:'Appartement'},
 {path:'**',redirectTo:'home',pathMatch:'full'}
 
   

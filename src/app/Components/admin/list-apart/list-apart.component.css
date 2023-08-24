@@ -15,7 +15,8 @@
 
 
   .paid {
-    background-color: red;
+    background-color: rgb(174, 48, 48);
+    color:white
   }
   
   .in-progress {
@@ -23,7 +24,8 @@
   }
   
   .amicale {
-    background-color: rgb(255, 102, 227);
+    background-color: rgb(37, 32, 32);
+    color:white
   }
   
   .avance {
@@ -38,7 +40,7 @@
   }
   
   .red {
-    background-color: #F94C46;
+    background-color: rgb(190, 61, 61);
     width: 30px;
     height: 30px;
     margin-left: 20px;
@@ -62,7 +64,8 @@
   }
   
   .black {
-    background-color: rgb(255, 102, 227);
+    background-color: rgb(37, 32, 32);
+    color:white;
     width: 30px;
     height: 30px;
     margin-left: 20px;

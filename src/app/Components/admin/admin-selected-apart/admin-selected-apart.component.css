@@ -122,3 +122,12 @@
     color: #ffc107;
     font-size: 30px;
   }
+
+  td {
+    padding: 10px; /* Adjust the value as per your preference */
+    
+  }
+
+  input{
+    border: 1px solid black;
+  }

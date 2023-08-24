@@ -34,30 +34,81 @@
       <div class="product-description">
         <span>Appartement</span>
         <h1>{{Apart?.code}} : {{Apart?.name}}</h1>
-        <p>{{Apart?.description}}</p>
+        
       </div>
 
       <!-- Product Configuration -->
       <div class="product-configuration">
-        <!-- Product Color -->
-        <div class="product-color">
-          <span>Color</span>
-          <div class="color-choose"></div>
-        </div>
+        <h5>Description</h5>
+        <p>{{Apart?.description}}</p>
+        <p>Entrée dimanche 14h00</p>
+          <p>Sortie dimanche 10h00 du matin</p>
+      </div>
+      <hr>
 
-        <!-- Cable Configuration -->
-        <div class="cable-config">
-          <span>Cable configuration</span>
-          <div class="cable-choose"></div>
-          <a href="#">How to configure your headphones</a>
-        </div>
+      <div class="characteristics-container" *ngIf="Apart?.description.includes('S+2')">
+        <h5>Caractéristiques</h5>
+        <div class="check-list">
+      <div> <i class="fa-solid fa-check" style="color: #00c73c;"></i>Parking <br></div> 
+
+    <div>  <i class="fa-solid fa-check" style="color: #00c73c;"></i> Balcon<br></div> 
+       
+  <div>  <i class="fa-solid fa-check" style="color: #00c73c;"></i>Caméra de surveillance<br></div> 
+       
+<div>  <i class="fa-solid fa-check" style="color: #00c73c;"></i>1 Climatiseur<br></div> 
+       
+<div>   <i class="fa-solid fa-check" style="color: #00c73c;"></i>Four<br></div> 
+       
+<div>  <i class="fa-solid fa-check" style="color: #00c73c;"></i>Machine à laver<br></div> 
+       
+<div>   <i class="fa-solid fa-check" style="color: #00c73c;"></i>1 TV<br></div> 
+       
+<div>   <i class="fa-solid fa-check" style="color: #00c73c;"></i>2 Ventilateurs<br></div> 
+       
+<div>    <i class="fa-solid fa-check" style="color: #00c73c;"></i>chauffe eau solaire<br></div> 
+       
+<div>    <i class="fa-solid fa-check" style="color: #00c73c;"></i>Gaz à Four<br></div> 
+       
+<div>     <i class="fa-solid fa-check" style="color: #00c73c;"></i>Terrasse<br></div> 
+       
+
+      </div>
       </div>
 
-      <!-- Product Pricing -->
-      <div class="product-price">
-        <span>{{Apart?.price}} DT</span>
-        
+      
+      <div class="characteristics-container" *ngIf="Apart?.description.includes('S+1')">
+        <h5>Caractéristiques</h5>
+        <div class="check-list">
+      <div> <i class="fa-solid fa-check" style="color: #00c73c;"></i>Parking <br></div> 
+
+    <div>  <i class="fa-solid fa-check" style="color: #00c73c;"></i> Balcon<br></div> 
+       
+  <div>  <i class="fa-solid fa-check" style="color: #00c73c;"></i>Caméra de surveillance<br></div> 
+       
+<div>  <i class="fa-solid fa-check" style="color: #00c73c;"></i>1 Climatiseur<br></div> 
+       
+<div>   <i class="fa-solid fa-check" style="color: #00c73c;"></i>Four<br></div> 
+       
+<div>  <i class="fa-solid fa-check" style="color: #00c73c;"></i>Machine à laver<br></div> 
+       
+<div>   <i class="fa-solid fa-check" style="color: #00c73c;"></i>1 TV<br></div> 
+       
+<div>   <i class="fa-solid fa-check" style="color: #00c73c;"></i>1 Ventilateur<br></div> 
+       
+<div>    <i class="fa-solid fa-check" style="color: #00c73c;"></i>chauffe eau solaire<br></div> 
+       
+<div>    <i class="fa-solid fa-check" style="color: #00c73c;"></i>Gaz à Four<br></div> 
+       
+<div>     <i class="fa-solid fa-check" style="color: #00c73c;"></i>Terrasse<br></div> 
+       
+
       </div>
+      </div>
+
+      
+
+
+      
     </div>
   </div>
   
@@ -69,7 +120,9 @@
   <div class="red"></div> Non Disponible
 
 </div>
-Choisissez une date pour reserver 
+<br>
+<p>Appuyez sur une date disponible pour reserver ou appelez 98271425</p>
+<br>
 <div class="table-responsive">
 <table class="table table-bordered" style="border:1px solid black">
   <thead>
@@ -114,7 +167,7 @@ Choisissez une date pour reserver
 
       <div class="formbold-mb-3">
         
-        <label for="address" class="formbold-form-label">CIN </label>
+        <label for="address" class="formbold-form-label">CIN (facultatif) </label>
         <input
           type="text"
           name="address"
@@ -137,18 +190,7 @@ Choisissez une date pour reserver
           
         />
       </div>
-      <div class="formbold-mb-3">
-        
-        <label for="address" class="formbold-form-label">Region </label>
-        <input
-          type="text"
-          name="address"
-          id="address"
-          class="formbold-form-input"
-          formControlName="region"
-          
-        />
-      </div>
+      
 
       
 

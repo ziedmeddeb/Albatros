@@ -1,5 +1,8 @@
+<br>
+<i class="fa-solid fa-arrow-left fa-xl" routerLink="/admindash" style="position: relative;left: 20px;cursor: pointer;"></i>
+<h1 style="text-align: center;margin: 5%;">{{cod}} : {{datede | date:'dd/MM'}} au {{dateFin | date:'dd/MM'}}</h1>
 <div *ngIf="reserve">
-<h1 style="text-align: center;margin: 5%;">Reservations pour {{datede | date:'dd/MM'}}</h1>
+
 <i class="fa-regular fa-square-plus fa-xl" style="float:right;margin:20px ;cursor: pointer;"
 (click)="show()"></i>
 <div class="table-responsive">
@@ -17,14 +20,14 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let u of users">
+      <tr *ngFor="let u of users;index as i">
         <td>{{u.user.firstName}}</td>
         <td>{{u.user.lastName}}</td>
         <td>{{u.reser.cin}}</td>
         
         <td>{{u.reser.ntel}}</td>
         <td>{{u.reser.region}}</td>
-        <td><button type="button" class="btn btn-primary" (click)="confirmRes(u.reser._id)">Confirmer</button></td>
+        <td><button type="button" class="btn btn-primary" (click)="confirmRes(u.user._id,u.reser._id,i)">Confirmer</button></td>
       </tr>
       
       
@@ -33,8 +36,8 @@
 </div>
 
 <div
-  class="formbold-main-wrapper"
-  style="margin-top: 0% !important; width: 97% !important"
+ 
+  style="margin-top: 0% !important; width: 100% !important"
   *ngIf="showForm"
 >
   <!-- Author: FormBold Team -->
@@ -46,71 +49,71 @@
         <p> </p>
       </div>
 
-      <div class="formbold-mb-3">
+      
         
         <label for="address" class="formbold-form-label">Prénom </label>
         <input
           type="text"
           name="address"
           id="address"
-          class="formbold-form-input"
+          
           formControlName="firstName"
           
         />
-      </div>
+      
 
-      <div class="formbold-mb-3">
+      
         
         <label for="address" class="formbold-form-label">Nom </label>
         <input
           type="text"
           name="address"
           id="address"
-          class="formbold-form-input"
+         
           formControlName="lastName"
           
         />
-      </div>
+      
 
       
 
-      <div class="formbold-mb-3">
+      
         
         <label for="address" class="formbold-form-label">CIN </label>
         <input
           type="text"
           name="address"
           id="address"
-          class="formbold-form-input"
+         
           formControlName="cin"
           
         />
-      </div>
+      
 
-      <div class="formbold-mb-3">
+    
         
         <label for="address" class="formbold-form-label">N° Telephone </label>
         <input
           type="text"
           name="address"
           id="address"
-          class="formbold-form-input"
+         
           formControlName="ntel"
           
         />
-      </div>
-      <div class="formbold-mb-3">
+      
+      
         
         <label for="address" class="formbold-form-label">Region </label>
         <input
           type="text"
           name="address"
           id="address"
-          class="formbold-form-input"
+          
           formControlName="region"
           
         />
-      </div>
+      
 
       <div class="formbold-mb-3">
         
@@ -135,6 +138,10 @@
           En cours
         </label>
       </div>
+
+      <label for="remarque">Remarque: </label>
+        <input type="text" formControlName="remarque">
+        <br>
 
       
 
@@ -211,49 +218,51 @@
      
       <p>Reservé par : {{user?.nom}} </p>
       <h3 style="text-align: center;margin: 5%;">Reservé pour  </h3>
+      <form [formGroup]="modifFormAdmin" (ngSubmit)="modifadmin()">
+        <table>
+          <tr>
+            <td>Prénom:</td>
+            <td><input type="text" formControlName="firstName"></td>
+          </tr>
+          <tr>
+            <td>Nom:</td>
+            <td><input type="text" formControlName="lastName"></td>
+          </tr>
+          <tr>
+            <td>Cin:</td>
+            <td><input type="text" formControlName="cin"></td>
+          </tr>
+          <tr>
+            <td>Téléphone:</td>
+            <td><input type="text" formControlName="ntel"></td>
+          </tr>
+          <tr>
+            <td>Région:</td>
+            <td><input type="text" formControlName="region"></td>
+          </tr>
+        </table>
       
-      <p>Prénom : {{user?.firstName}}</p>
+        <label for="status">Etat: </label>
+        <label>
+          <input type="radio" name="status" value="Amicale" formControlName="status"> Amicale
+        </label>
+        <label>
+          <input type="radio" name="status" value="Avance" formControlName="status"> Avance
+        </label>
+        <label>
+          <input type="radio" name="status" value="Payé" formControlName="status"> Payé
+        </label>
+        <label>
+          <input type="radio" name="status" value="En cours" formControlName="status"> En cours
+        </label>
+        
+        <br>
+        <label for="remarque">Remarque: </label>
+        <input type="text" formControlName="remarque">
+      <br>
+        <button type="submit" class="btn btn-success">Modifier</button>
+      </form>
       
-               <p>Nom : {{user?.lastName}}</p>
-              <p> Cin : {{user?.cin}}</p>
-               
-               <p>Telephone : {{user?.ntel}}</p>
-              <p> Region : {{user?.region}}</p>
-              <p>Etat : {{user?.status}}</p>
-              <form [formGroup]="modifFormAdmin" (ngSubmit)="modifadmin()">
-
-                <div class="formbold-mb-3">
-                  <label for="address" class="formbold-form-label">Etat</label>
-                  
-                  <label>
-                    <input name="status" type="radio" value="Amicale" formControlName="status">
-                    Amicale
-                  </label>
-                
-                  <label>
-                    <input name="status" type="radio" value="Avance" formControlName="status">
-                    Avance
-                  </label>
-                
-                  <label>
-                    <input name="status" type="radio" value="Payé" formControlName="status">
-                    Payé
-                  </label>
-
-                  <label>
-                    <input name="status" type="radio" value="En cours" formControlName="status">
-                    En cours
-                  </label>
-                  
-                </div>
-                <label for="address" class="formbold-form-label">Remarque</label>
-                <label>
-                  
-                  <input type="text"  formControlName="remarque">
-                  
-                </label><br>
-                <button type="button" type="submit" class="btn btn-success">Modifier</button>
-               </form> 
               
               <br>
               <button type="button" class="btn btn-danger" (click)="annuler1()">Annuler</button>

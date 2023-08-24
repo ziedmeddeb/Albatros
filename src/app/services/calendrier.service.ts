@@ -23,7 +23,7 @@ export class CalendrierService {
   }
 
   updateCalendrierBydate(idApart:string,idDate:string,status:string,persId:any,role:any,nom:string){
-    return this.http.put<any>(url+"update/"+idApart+"/"+idDate+"/"+status+"/"+persId+"/"+role+"/"+nom,{});
+    return this.http.put<any>(url+"update/"+idApart+"/"+idDate+"/"+status+"/"+persId+"/"+role,{nom:nom});
   }
 
   updateCalendrierBydate2(idApart:string,idDate:string,status:string){

@@ -57,4 +57,9 @@ export class ListApartComponent implements OnInit {
     
   }
 
+  pushSubscription()
+  {
+    
+  }
+
 }

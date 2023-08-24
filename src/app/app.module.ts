@@ -26,6 +26,9 @@ import { RegisterColabComponent } from './Components/colab/register-colab/regist
 import { LoginColabComponent } from './Components/colab/login-colab/login-colab.component';
 import { ListApartColabComponent } from './Components/colab/list-apart-colab/list-apart-colab.component';
 import { SelectedApartColabComponent } from './Components/colab/selected-apart-colab/selected-apart-colab.component';
+import { SiteArchComponent } from './Components/user/site-arch/site-arch.component';
+import { LoisirComponent } from './Components/user/loisir/loisir.component';
+
 
 
 
@@ -52,7 +55,9 @@ import { SelectedApartColabComponent } from './Components/colab/selected-apart-c
     RegisterColabComponent,
     LoginColabComponent,
     ListApartColabComponent,
-    SelectedApartColabComponent
+    SelectedApartColabComponent,
+    SiteArchComponent,
+    LoisirComponent
  
     
 
@@ -63,7 +68,8 @@ import { SelectedApartColabComponent } from './Components/colab/selected-apart-c
    
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    
    
     
   ],

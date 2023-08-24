@@ -15,6 +15,7 @@ export class AdminSelectedApartComponent implements OnInit {
   idApart!: string;
   datede!: string;
   idCal!: string;
+  dateFin!: string;
   showForm = false;
   reserve = true;
   reserve1 = false;
@@ -25,6 +26,7 @@ export class AdminSelectedApartComponent implements OnInit {
   user: any;
   person:any;
   jwt=new JwtHelperService(); 
+  cod:any;
 
   users: any[] = [];
   reservations: any[] = [];
@@ -41,6 +43,9 @@ export class AdminSelectedApartComponent implements OnInit {
     this.idApart = this.activatedRoute.snapshot.params['id'];
     this.datede = this.activatedRoute.snapshot.params['calender'];
     this.idCal = this.activatedRoute.snapshot.params['idCal'];
+    this.cod = this.activatedRoute.snapshot.params['cod'];
+    
+    this.dateFin = this.activatedRoute.snapshot.params['dateFin'];
 
     this.serviceRes
       .getReserveByApartIdAndDate(this.idApart, this.datede)
@@ -77,6 +82,11 @@ export class AdminSelectedApartComponent implements OnInit {
                
 
                 this.modifFormAdmin = this.fb.group({
+                  firstName: [this.user.firstName],
+                  lastName: [this.user.lastName],
+                  cin: [this.user.cin],
+                  ntel: [this.user.ntel],
+                  region: [this.user.region],
                   status: [this.user.status],
                   remarque:[this.user.remarque]
                 });
@@ -97,7 +107,8 @@ export class AdminSelectedApartComponent implements OnInit {
       cin: [''],
       ntel: [''],
       region: [''],
-      status: ['']
+      status: [''],
+      remarque:['']
     });
 
     
@@ -106,16 +117,32 @@ export class AdminSelectedApartComponent implements OnInit {
 
   }
 
-  confirmRes(id: string) {
+  confirmRes(id: string,idres:string,i:number) {
     this.serviceUser.getUserById(id).subscribe((data) => {
     this.calendService
       .updateCalendrierBydate(this.idApart, this.idCal,"En cours",
       this.jwt.decodeToken(localStorage.getItem('adminToken')!)._id,"admin",
        data.firstName + ' ' + data.lastName)
-      .subscribe((data) => {
-        console.log(data);
+      .subscribe((data1) => {
         
-        this.serviceRes.updateReserve(id,"En cours","Aucune").subscribe((data) => {
+        
+        this.serviceRes.updateReserve(idres,
+          {firstName:data.firstName,
+            lastName:data.lastName,
+            appartement:this.idApart,
+            status:"En cours",
+            remarque:"",
+            cin:this.users[i].reser.cin,
+            region:this.users[i].reser.region,
+            ntel:this.users[i].reser.ntel,
+            date:this.datede
+            
+
+
+            
+            
+            }
+          ).subscribe((data) => {
           window.location.reload();
         });
         
@@ -152,6 +179,7 @@ export class AdminSelectedApartComponent implements OnInit {
         ntel: this.reservForm.value.ntel,
         date: this.datede,
         status:this.reservForm.value.status,
+        remarque:this.reservForm.value.remarque,
         nom:"Chokri Meddeb"
       })
       .subscribe((data) => {
@@ -163,7 +191,7 @@ export class AdminSelectedApartComponent implements OnInit {
             this.reservForm.value.firstName + ' ' + this.reservForm.value.lastName)
             .subscribe((data) => {
               console.log(this.jwt.decodeToken(localStorage.getItem('adminToken')!)._id);
-              // console.log(data);
+              
                window.location.reload();
             });
         });
@@ -192,11 +220,16 @@ export class AdminSelectedApartComponent implements OnInit {
   modif()
   {
     
-    this.serviceRes.updateReserve(this.users[0].reser._id,this.modifForm.value.status,this.modifForm.value.remarque).subscribe((data) => {
+    this.serviceRes.updateReserve(this.users[0].reser._id,{
+    firstName: this.users[0].user.firstName,lastName: this.users[0].user.lastName,
+    cin: this.users[0].user.cin,region: this.users[0].user.region,
+    ntel: this.users[0].user.ntel,status:this.modifForm.value.status,
+    remarque:this.modifForm.value.remarque
+    }).subscribe((data) => {
       this.calendService
       .updateCalendrierBydate(this.idApart, this.idCal,this.modifForm.value.status,
         this.jwt.decodeToken(localStorage.getItem('adminToken')!)._id,"admin",
-        this.reservForm.value.firstName + ' ' + this.reservForm.value.lastName)
+        this.users[0].user.firstName + ' ' + this.users[0].user.lastName)
       .subscribe((data) => {
         window.location.reload();
       });
@@ -206,11 +239,11 @@ export class AdminSelectedApartComponent implements OnInit {
   modifadmin()
   {
     
-    this.serviceRes.updateReserve(this.user._id,this.modifFormAdmin.value.status,this.modifFormAdmin.value.remarque).subscribe((data) => {
+    this.serviceRes.updateReserve(this.user._id,this.modifFormAdmin.value).subscribe((data) => {
       this.calendService
       .updateCalendrierBydate(this.idApart, this.idCal,this.modifFormAdmin.value.status,
         this.jwt.decodeToken(localStorage.getItem('adminToken')!)._id,"admin",
-        this.reservForm.value.firstName + ' ' + this.reservForm.value.lastName)
+        this.modifFormAdmin.value.firstName + ' ' + this.modifFormAdmin.value.lastName)
       .subscribe((data) => {
         console.log(data);
         window.location.reload();

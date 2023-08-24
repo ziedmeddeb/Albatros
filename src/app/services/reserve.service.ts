@@ -19,11 +19,11 @@ export class ReserveService {
   getReserveByApartIdAndDate(id:string,date:any):Observable<any>{
     return this.http.get<any>(url+"apart/"+id+"/date/"+date);
   }
-  updateReserve(id:string,status:string,remarque:string){
-    return this.http.put<any>(url+"update/"+id+"/"+status+"/"+remarque,{});
+  updateReserve(id:string,reserv:any):Observable<any>{
+    return this.http.put<any>(url+"update/"+id,reserv);
   }
   annulerReserv(id:string){
-    return this.http.put<any>(url+"annuler/"+id,{});
+    return this.http.delete<any>(url+"annuler/"+id);
   }
 
   getReserveByDate(date:any):Observable<any[]>{

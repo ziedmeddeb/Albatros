@@ -23,6 +23,8 @@ export class SelectedApartColabComponent implements OnInit {
   adminres = false;
   reservations: any[] = [];
   jwt=new JwtHelperService();
+  cod:any;
+  dateFin!: string;
   constructor( private activatedRoute: ActivatedRoute,
     private serviceRes: ReserveService,
     private serviceUser: UserService,
@@ -34,6 +36,9 @@ export class SelectedApartColabComponent implements OnInit {
     this.idApart = this.activatedRoute.snapshot.params['id'];
     this.datede = this.activatedRoute.snapshot.params['calender'];
     this.idCal = this.activatedRoute.snapshot.params['idCal'];
+    this.cod = this.activatedRoute.snapshot.params['cod'];
+    
+    this.dateFin = this.activatedRoute.snapshot.params['dateFin'];
 
     this.serviceRes
     .getReserveByApartIdAndDate(this.idApart, this.datede)
@@ -51,6 +56,11 @@ export class SelectedApartColabComponent implements OnInit {
               this.adminres = true;
                 
                 this.modifFormAdmin = this.fb.group({
+                  firstName: [this.user.firstName],
+                  lastName: [this.user.lastName],
+                  cin: [this.user.cin],
+                  ntel: [this.user.ntel],
+                  region: [this.user.region],
                   status: [this.user.status],
                   remarque:[this.user.remarque]
                 });
@@ -69,7 +79,8 @@ export class SelectedApartColabComponent implements OnInit {
       cin: [''],
       ntel: [''],
       region: [''],
-      status: ['']
+      status: [''],
+      remarque:['']
     });  
             
   }
@@ -89,7 +100,8 @@ export class SelectedApartColabComponent implements OnInit {
         ntel: this.reservForm.value.ntel,
         date: this.datede,
         status:this.reservForm.value.status,
-        nom:data.firstName + " " + data.lastName
+        nom:data.firstName + " " + data.lastName,
+        remarque:this.reservForm.value.remarque
       })
       .subscribe((data) => {
         this.user = this.reservForm.value;
@@ -126,10 +138,12 @@ export class SelectedApartColabComponent implements OnInit {
   modifadmin()
   {
     
-    this.serviceRes.updateReserve(this.user._id,this.modifFormAdmin.value.status,this.modifFormAdmin.value.remarque).subscribe((data) => {
+    this.serviceRes.updateReserve(this.user._id,this.modifFormAdmin.value).subscribe((data) => {
+      console.log(data);
       this.calendService
       .updateCalendrierBydate(this.idApart, this.idCal,this.modifFormAdmin.value.status,
-        this.jwt.decodeToken(localStorage.getItem('colabToken')!)._id,"colab","")
+        this.jwt.decodeToken(localStorage.getItem('colabToken')!)._id,"colab",
+        this.modifFormAdmin.value.firstName + ' ' + this.modifFormAdmin.value.lastName)
       .subscribe((data) => {
         window.location.reload();
       });

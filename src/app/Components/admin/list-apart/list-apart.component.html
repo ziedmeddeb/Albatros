@@ -15,7 +15,7 @@
     
     </div>
     <div class="table-responsive">
-    <table class="table table-bordered" style="border:1px solid black">
+    <table class="table table-bordered" style="border:1px solid white">
       <thead>
         <tr>
           
@@ -43,10 +43,10 @@
               'in-progress': availability.status === 'En cours',
               'amicale': availability.status === 'Amicale',
               'avance': availability.status === 'Avance'}"
-              style="border: 1px solid black; cursor: pointer;"
-             [routerLink]="['../adminSelectedApart',a?.appartement._id,availability.dateDeb,availability._id]"
+              style="border: 1px solid white; cursor: pointer;"
+             [routerLink]="['../adminSelectedApart',a?.appartement._id,availability.dateDeb,availability._id,availability.dateFin,a?.appartement.code]"
             >
-            <span *ngIf="availability.nom != ''"> {{availability.nom}}</span>
+            <span *ngIf="availability.nom != ''"> {{availability.nom}} - {{availability.price}}</span>
             <span *ngIf="availability.nom == ''">{{availability.price}}</span>
             </td>
           </ng-container>

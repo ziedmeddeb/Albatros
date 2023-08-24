@@ -1,3 +1,12 @@
+
+<a  style="margin-left: 80%;" class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <i class="fa-solid fa-user"></i>
+</a>
+<div class="dropdown-menu" aria-labelledby="profileDropdown" style="right: 0px;">
+  
+  <button class="dropdown-item" (click)="disconnect()">Déconnecter</button>
+</div>
+
 <div>
     <div class="legende" style="margin-top: 60px;">
     <div class="green legend-item"></div> Disponible
@@ -44,12 +53,14 @@
               'amicale': availability.status === 'Amicale',
               'avance': availability.status === 'Avance',
             'not-mine' : availability.persId !== '' && availability.persId !== colaborateur  }"
-              style="border: 1px solid black; cursor: pointer;"
+              style="border: 1px solid white; cursor: pointer;"
               
-             [routerLink]="['../colabApart',a?.appartement._id,availability.dateDeb,availability._id]"
+             [routerLink]="['../colabApart',a?.appartement._id,availability.dateDeb,availability._id,availability.dateFin,a?.appartement.code]"
             >
             <span *ngIf="availability.persId == colaborateur && availability.nom != ''"> {{availability.nom}}</span>
             <span *ngIf="availability.nom == ''"> {{availability.price}}   </span>
+
+            
             </td>
           </ng-container>
         </tr>
