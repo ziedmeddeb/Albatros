@@ -70,6 +70,7 @@ import { LoisirComponent } from './Components/user/loisir/loisir.component';
     HttpClientModule,
     FormsModule,
     
+    
    
     
   ],

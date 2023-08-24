@@ -14,7 +14,8 @@ export class ListApartComponent implements OnInit {
  calenders:any[]=[];
  availabilities:any[]=[];
   constructor(private calenderService:CalendrierService,private appartService:AppartementService,
-    private router:Router) { }
+    private router:Router,
+   ) { }
 
   ngOnInit(): void {
 
