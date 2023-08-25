@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -28,6 +28,7 @@ import { ListApartColabComponent } from './Components/colab/list-apart-colab/lis
 import { SelectedApartColabComponent } from './Components/colab/selected-apart-colab/selected-apart-colab.component';
 import { SiteArchComponent } from './Components/user/site-arch/site-arch.component';
 import { LoisirComponent } from './Components/user/loisir/loisir.component';
+import { SwPush, ServiceWorkerModule } from '@angular/service-worker';
 
 
 
@@ -69,6 +70,13 @@ import { LoisirComponent } from './Components/user/loisir/loisir.component';
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
+    
     
     
    

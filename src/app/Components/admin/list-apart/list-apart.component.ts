@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { Appartements } from 'src/app/entities/appartements';
 import { AppartementService } from 'src/app/services/appartement.service';
 import { CalendrierService } from 'src/app/services/calendrier.service';
+import { SwPush } from '@angular/service-worker';
+import { NotificationService } from 'src/app/services/notification.service';
+
 
 @Component({
   selector: 'app-list-apart',
@@ -15,13 +18,19 @@ export class ListApartComponent implements OnInit {
  availabilities:any[]=[];
   constructor(private calenderService:CalendrierService,private appartService:AppartementService,
     private router:Router,
-   ) { }
+      private _swPush:SwPush,
+      private notifService:NotificationService) { }
 
+    
   ngOnInit(): void {
 
     if(localStorage.getItem('adminToken')==null){
       this.router.navigate(['/adminlog']);
     }
+    
+    
+    this.requestSubscription();
+    
 
 
     this.appartService.getAppartements().subscribe(data => {
@@ -58,9 +67,20 @@ export class ListApartComponent implements OnInit {
     
   }
 
-  pushSubscription()
-  {
+  requestSubscription = () => {
     
-  }
+    if (!this._swPush.isEnabled) {
+      console.log("Notification is not enabled.");
+      return;
+    }
+    this._swPush.requestSubscription({
+      serverPublicKey: 'BKAYo_k46kJ8vPec8BQLPVCv8xyTUJh9RRz3nJ23TnOQQ5KZqO7bk8UqNTlTHgpkDBr9nTqRP_MO_0p615cEcy4'
+    }).then((_) => {
+      console.log(JSON.stringify(_));
+      this.notifService.stockUserSub(_).subscribe((_) => console.log(_));
+    }).catch((_) => console.log);
+  };
+
+  
 
 }
