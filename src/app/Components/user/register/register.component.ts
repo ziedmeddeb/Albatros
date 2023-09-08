@@ -37,7 +37,7 @@ export class RegisterComponent implements OnInit {
       else
       {
       this.serviceUser.register(this.userForm.value).subscribe(data=>{
-        console.log(data);
+        
         localStorage.setItem('userToken',data.token);
         alert("Vous êtes inscrit");
         this.router.navigate(['/home']);

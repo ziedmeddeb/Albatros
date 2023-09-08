@@ -55,7 +55,7 @@ export class SelectedApartComponent implements OnInit {
    
       this.serviceCalen.getCalendrierByApartId(this.idAp).subscribe(data => {
         this.calender = data; // Accessing the 'data' property of the response
-        console.log(this.calender.availabilities);
+        
       });
     
       this.reservForm=this.fb.nonNullable.group({
@@ -73,7 +73,7 @@ export class SelectedApartComponent implements OnInit {
 
   show(c:any){
     this.selectedCell = c;
-    console.log(this.selectedCell);
+    
     this.showForm=true;
     
   }
@@ -95,11 +95,13 @@ export class SelectedApartComponent implements OnInit {
           
       this.reserveService.createReserve({cin:this.reservForm.value.cin,
         firstName:this.user.firstName,lastName:this.user.lastName,
-        region:"",ntel:this.reservForm.value.ntel,
+        dateRes:new Date(Date.now()),ntel:this.reservForm.value.ntel,
         date:this.selectedCell.dateDeb,
+        code:this.Apart.code,
         appartement:this.idAp,user:this.jwt.decodeToken(localStorage.getItem('userToken')!)['_id']}).subscribe(data=>{
         
           alert("demande de reservation a été envoyé avec succès");
+          
         }
         );
       });

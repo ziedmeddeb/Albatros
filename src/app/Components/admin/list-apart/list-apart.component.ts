@@ -29,7 +29,7 @@ export class ListApartComponent implements OnInit {
     }
     
     
-    this.requestSubscription();
+    
     
 
 
@@ -74,10 +74,20 @@ export class ListApartComponent implements OnInit {
       return;
     }
     this._swPush.requestSubscription({
-      serverPublicKey: 'BKAYo_k46kJ8vPec8BQLPVCv8xyTUJh9RRz3nJ23TnOQQ5KZqO7bk8UqNTlTHgpkDBr9nTqRP_MO_0p615cEcy4'
+      serverPublicKey: 'BEGDn-yTN_RAqKQbhPkPQauzuVUy0XzKAhUsLjmjCCAb-5r8DSRVz4kCYBJVShL5mcT1UxFBRhl-AQ42_-SbU0w'
     }).then((_) => {
       console.log(JSON.stringify(_));
-      this.notifService.stockUserSub(_).subscribe((_) => console.log(_));
+      const subscriptionObject = JSON.parse(JSON.stringify(_));
+      const p256dhValue = subscriptionObject.keys.p256dh;
+      const authValue = subscriptionObject.keys.auth;
+      this.notifService.stockUserSub({endpoint:_.endpoint,
+        p256dh:p256dhValue,
+        auth:authValue,
+        role:"admin"
+
+      
+      }).subscribe((_) => console.log(_));
+      
     }).catch((_) => console.log);
   };
 

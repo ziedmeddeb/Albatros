@@ -69,15 +69,7 @@
         />
       
         
-        <label for="address" class="formbold-form-label">Region </label>
-        <input
-          type="text"
-          name="address"
-          id="address"
-          
-          formControlName="region"
-          
-        />
+        
       
 
       
@@ -125,6 +117,7 @@
     <h1 style="text-align: center;margin: 5%;">Reservé pour  </h1>
     <form [formGroup]="modifFormAdmin" (ngSubmit)="modifadmin()">
       <table>
+        
         <tr>
           <td>Prénom:</td>
           <td><input type="text" formControlName="firstName"></td>
@@ -141,10 +134,8 @@
           <td>Téléphone:</td>
           <td><input type="text" formControlName="ntel"></td>
         </tr>
-        <tr>
-          <td>Région:</td>
-          <td><input type="text" formControlName="region"></td>
-        </tr>
+
+        
       </table>
     
       <label for="status">Etat: </label>

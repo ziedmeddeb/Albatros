@@ -17,7 +17,7 @@ listAparts1!:Appartements[];
     this.apartService.getAppartements().subscribe(data=>{
       this.listAparts=data;
       this.listAparts1=data;
-      console.log(data);
+      
     }
     );
   }

@@ -60,7 +60,7 @@ export class SelectedApartColabComponent implements OnInit {
                   lastName: [this.user.lastName],
                   cin: [this.user.cin],
                   ntel: [this.user.ntel],
-                  region: [this.user.region],
+                  
                   status: [this.user.status],
                   remarque:[this.user.remarque]
                 });
@@ -78,7 +78,7 @@ export class SelectedApartColabComponent implements OnInit {
       lastName: [''],
       cin: [''],
       ntel: [''],
-      region: [''],
+      dateRes: new Date(Date.now()),
       status: [''],
       remarque:['']
     });  
@@ -96,12 +96,13 @@ export class SelectedApartColabComponent implements OnInit {
         lastName: this.reservForm.value.lastName,
         appartement: this.idApart,
         cin: this.reservForm.value.cin,
-        region: this.reservForm.value.region,
+        dateRes: this.reservForm.value.dateRes,
         ntel: this.reservForm.value.ntel,
         date: this.datede,
         status:this.reservForm.value.status,
         nom:data.firstName + " " + data.lastName,
-        remarque:this.reservForm.value.remarque
+        remarque:this.reservForm.value.remarque,
+        code:this.cod,
       })
       .subscribe((data) => {
         this.user = this.reservForm.value;

@@ -9,25 +9,30 @@
 <table class="table table-hover">
     <thead>
       <tr>
+        
         <th>Firstname</th>
         <th>Lastname</th>
         <th>Cin</th>
         
         <th>Telephone</th>
-        <th>Region</th>
+        <th>Date demande</th>
         <th>Actions</th>
         
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let u of users;index as i">
+        
         <td>{{u.user.firstName}}</td>
         <td>{{u.user.lastName}}</td>
         <td>{{u.reser.cin}}</td>
         
         <td>{{u.reser.ntel}}</td>
-        <td>{{u.reser.region}}</td>
-        <td><button type="button" class="btn btn-primary" (click)="confirmRes(u.user._id,u.reser._id,i)">Confirmer</button></td>
+        <td>{{u.reser.dateRes | date:'dd MMMM'}}</td>
+        <td>
+          <button style="margin:5px" type="button" class="btn btn-danger" (click)="supprim(u.reser._id)" >Supprimer</button>
+          <button  style="margin:5px" type="button" class="btn btn-primary" (click)="confirmRes(u.user._id,u.reser._id,i)">Confirmer</button>
+        </td>
       </tr>
       
       
@@ -104,16 +109,7 @@
       
       
         
-        <label for="address" class="formbold-form-label">Region </label>
-        <input
-          type="text"
-          name="address"
-          id="address"
-          
-          formControlName="region"
-          
-        />
-      
+       
 
       <div class="formbold-mb-3">
         
@@ -159,14 +155,14 @@
 
 <div *ngIf="reserve1">
 <h1 style="text-align: center;margin: 5%;">Reservé pour  </h1>
-
+<p>Date demande : {{users[0]?.reser.dateRes | date:'dd MMMM'}}</p>
 <p>Prénom : {{users[0]?.user.firstName}}</p>
 
          <p>Nom : {{users[0]?.user.lastName}}</p>
         <p> Cin : {{users[0]?.reser.cin}}</p>
          
          <p>Telephone : {{users[0]?.reser.ntel}}</p>
-        <p> Region : {{users[0]?.reser.region}}</p>
+        
         <p>Etat : {{users[0]?.reser.status}}</p>
 <form [formGroup]="modifForm" (ngSubmit)="modif()">
   <div class="formbold-mb-3">
@@ -221,6 +217,9 @@
       <form [formGroup]="modifFormAdmin" (ngSubmit)="modifadmin()">
         <table>
           <tr>
+            <td>Date Reservation : {{user?.dateRes | date:'dd/MM'}}</td>
+          </tr>
+          <tr>
             <td>Prénom:</td>
             <td><input type="text" formControlName="firstName"></td>
           </tr>
@@ -236,10 +235,7 @@
             <td>Téléphone:</td>
             <td><input type="text" formControlName="ntel"></td>
           </tr>
-          <tr>
-            <td>Région:</td>
-            <td><input type="text" formControlName="region"></td>
-          </tr>
+          
         </table>
       
         <label for="status">Etat: </label>

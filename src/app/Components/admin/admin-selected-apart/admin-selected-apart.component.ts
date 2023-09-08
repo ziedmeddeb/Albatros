@@ -54,12 +54,12 @@ export class AdminSelectedApartComponent implements OnInit {
         const confirmedReservations = this.reservations.filter(
           (elt) => ['En cours', 'Payé', 'Avance', 'Amicale'].includes(elt.status)
         );
-        console.log(confirmedReservations);
+        
        
           if (confirmedReservations.length > 0) {
             
             if (confirmedReservations[0].user != null) {
-              console.log(confirmedReservations[0].user);
+              
 
               this.serviceUser.getUserById(confirmedReservations[0].user).subscribe((data1) => {
                 this.users.push({ user: data1, reser: confirmedReservations[0] });
@@ -86,7 +86,7 @@ export class AdminSelectedApartComponent implements OnInit {
                   lastName: [this.user.lastName],
                   cin: [this.user.cin],
                   ntel: [this.user.ntel],
-                  region: [this.user.region],
+                  
                   status: [this.user.status],
                   remarque:[this.user.remarque]
                 });
@@ -106,7 +106,7 @@ export class AdminSelectedApartComponent implements OnInit {
       lastName: [''],
       cin: [''],
       ntel: [''],
-      region: [''],
+      dateRes:new Date(Date.now()),
       status: [''],
       remarque:['']
     });
@@ -133,7 +133,7 @@ export class AdminSelectedApartComponent implements OnInit {
             status:"En cours",
             remarque:"",
             cin:this.users[i].reser.cin,
-            region:this.users[i].reser.region,
+            
             ntel:this.users[i].reser.ntel,
             date:this.datede
             
@@ -175,22 +175,23 @@ export class AdminSelectedApartComponent implements OnInit {
         lastName: this.reservForm.value.lastName,
         appartement: this.idApart,
         cin: this.reservForm.value.cin,
-        region: this.reservForm.value.region,
+        dateRes: this.reservForm.value.dateRes,
         ntel: this.reservForm.value.ntel,
         date: this.datede,
         status:this.reservForm.value.status,
         remarque:this.reservForm.value.remarque,
-        nom:"Chokri Meddeb"
+        nom:"Chokri Meddeb",
+        code:this.cod
       })
       .subscribe((data) => {
         this.user = this.reservForm.value;
-        console.log(this.jwt.decodeToken(localStorage.getItem('adminToken')!)._id);
+        
           this.calendService
             .updateCalendrierBydate(this.idApart, this.idCal,this.reservForm.value.status,
             this.jwt.decodeToken(localStorage.getItem('adminToken')!)._id,"admin",
             this.reservForm.value.firstName + ' ' + this.reservForm.value.lastName)
             .subscribe((data) => {
-              console.log(this.jwt.decodeToken(localStorage.getItem('adminToken')!)._id);
+              
               
                window.location.reload();
             });
@@ -222,7 +223,7 @@ export class AdminSelectedApartComponent implements OnInit {
     
     this.serviceRes.updateReserve(this.users[0].reser._id,{
     firstName: this.users[0].user.firstName,lastName: this.users[0].user.lastName,
-    cin: this.users[0].user.cin,region: this.users[0].user.region,
+    cin: this.users[0].user.cin,
     ntel: this.users[0].user.ntel,status:this.modifForm.value.status,
     remarque:this.modifForm.value.remarque
     }).subscribe((data) => {
@@ -245,9 +246,17 @@ export class AdminSelectedApartComponent implements OnInit {
         this.jwt.decodeToken(localStorage.getItem('adminToken')!)._id,"admin",
         this.modifFormAdmin.value.firstName + ' ' + this.modifFormAdmin.value.lastName)
       .subscribe((data) => {
-        console.log(data);
+        
         window.location.reload();
       });
+    });
+  }
+
+  supprim(id:any)
+
+  {
+    this.serviceRes.annulerReserv(id).subscribe((data) => {
+      this.users=this.users.filter((elt)=>elt.reser._id!=id);
     });
   }
 }
