@@ -121,7 +121,7 @@
 
 </div>
 <br>
-<p>Appuyez sur une date disponible pour reserver ou appelez 98271425</p>
+<p>Appuyez sur une date disponible pour reserver ou appelez <a href="tel:98271425">98271425</a> </p>
 <br>
 <div class="table-responsive">
 <table class="table table-bordered" style="border:1px solid black">
@@ -159,37 +159,12 @@
   <!-- Author: FormBold Team -->
   <!-- Learn More: https://formbold.com -->
   <div class="formbold-form-wrapper">
-    <form [formGroup]="reservForm" (ngSubmit)="reserver()">
+    
       <div class="formbold-form-title">
         <h2 class="">Réserver</h2>
         <p>Date : {{selectedCell.dateDeb | date:'dd-MM'}} au {{selectedCell.dateFin | date:'dd-MM'}} </p>
       </div>
 
-      <div class="formbold-mb-3">
-        
-        <label for="address" class="formbold-form-label">CIN (facultatif) </label>
-        <input
-          type="text"
-          name="address"
-          id="address"
-          class="formbold-form-input"
-          formControlName="cin"
-          
-        />
-      </div>
-
-      <div class="formbold-mb-3">
-        
-        <label for="address" class="formbold-form-label">N° Telephone </label>
-        <input
-          type="text"
-          name="address"
-          id="address"
-          class="formbold-form-input"
-          formControlName="ntel"
-          
-        />
-      </div>
       
 
       
@@ -198,9 +173,10 @@
         class="formbold-btn"
         type="submit"
         style="background-color: rgb(147, 147, 255)"
+        (click)="reserver()"
       >
-        Confirm
+        Réserver
       </button>
-    </form>
+    
   </div>
 </div>

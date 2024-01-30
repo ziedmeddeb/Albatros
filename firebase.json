@@ -1,10 +1,11 @@
 {
   "hosting": {
-    "public": "dist/tp10-angular14",
+    "public": "dist/residence-albatros",
     "ignore": [
       "firebase.json",
       "**/.*",
-      "**/node_modules/**"
+      "**/node_modules/**",
+      "firebase-messaging-sw.js"
     ],
     "rewrites": [
       {

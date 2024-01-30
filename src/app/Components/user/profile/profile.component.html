@@ -1,6 +1,6 @@
 <br>
 <i class="fa-solid fa-arrow-left fa-xl" routerLink="/home" style="position: relative;left: 20px;cursor: pointer;"></i>
-<div class="formbold-main-wrapper" style="padding-top: 0% !important;" >
+<div class="formbold-main-wrapper" style="padding-top: 0% !important;" *ngIf="userForm" >
     <div class="formbold-form-wrapper">
       <form  [formGroup]="userForm" (submit)="update()">
         <div class="formbold-form-title">
@@ -29,6 +29,19 @@
               id="lastname"
               class="formbold-form-input"
               formControlName="lastName"
+            />
+          </div>
+
+          <div>
+            <label for="ntel" class="formbold-form-label"> N° Telephone </label>
+            <input
+              type="text"
+              name="ntel"
+              id="ntel"
+              class="formbold-form-input"
+              formControlName="ntel"
+              minlength="8"
+              maxlength="8"
             />
           </div>
        

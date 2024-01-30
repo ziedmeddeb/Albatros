@@ -19,14 +19,16 @@ export class RegisterComponent implements OnInit {
       firstName:[''],
       lastName:[''],
       email:[''],
-      password:['']
+      password:[''],
+      ntel:[''],
     });
   }
 
 
   creer()
   { 
-      if (this.userForm.value['firstName']=="" || this.userForm.value['lastName']=="" || this.userForm.value['email']=="" || this.userForm.value['password']=="")
+      if (this.userForm.value['firstName']=="" || this.userForm.value['lastName']=="" || this.userForm.value['email']=="" || this.userForm.value['password']==""
+      ||this.userForm.value['ntel']=="" )
       {
         alert("veuillez remplir tous les champs");
       }

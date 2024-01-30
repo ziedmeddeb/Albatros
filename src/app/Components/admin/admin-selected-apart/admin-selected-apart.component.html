@@ -12,7 +12,7 @@
         
         <th>Firstname</th>
         <th>Lastname</th>
-        <th>Cin</th>
+        
         
         <th>Telephone</th>
         <th>Date demande</th>
@@ -25,7 +25,7 @@
         
         <td>{{u.user.firstName}}</td>
         <td>{{u.user.lastName}}</td>
-        <td>{{u.reser.cin}}</td>
+        
         
         <td>{{u.reser.ntel}}</td>
         <td>{{u.reser.dateRes | date:'dd MMMM'}}</td>
@@ -84,15 +84,7 @@
 
       
         
-        <label for="address" class="formbold-form-label">CIN </label>
-        <input
-          type="text"
-          name="address"
-          id="address"
-         
-          formControlName="cin"
-          
-        />
+      
       
 
     
@@ -159,7 +151,7 @@
 <p>Prénom : {{users[0]?.user.firstName}}</p>
 
          <p>Nom : {{users[0]?.user.lastName}}</p>
-        <p> Cin : {{users[0]?.reser.cin}}</p>
+        
          
          <p>Telephone : {{users[0]?.reser.ntel}}</p>
         
@@ -227,10 +219,7 @@
             <td>Nom:</td>
             <td><input type="text" formControlName="lastName"></td>
           </tr>
-          <tr>
-            <td>Cin:</td>
-            <td><input type="text" formControlName="cin"></td>
-          </tr>
+          
           <tr>
             <td>Téléphone:</td>
             <td><input type="text" formControlName="ntel"></td>

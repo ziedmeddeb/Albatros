@@ -23,22 +23,18 @@ export class ProfileComponent implements OnInit {
     }
     this.userService.getUserById(this.jwt.decodeToken(localStorage.getItem('userToken')!)['_id']).subscribe(data=>{
       this.user=data;
-      this.initForm();
+      this.userForm=this.fb.nonNullable.group({
+        firstName:[this.user.firstName],
+        lastName:[this.user.lastName],
+        email:[this.user.email],
+        ntel:[this.user.ntel],
+  
+      });
     });
     
 
   }
 
-  initForm()
-  {
-    this.userForm=this.fb.nonNullable.group({
-      firstName:[this.user.firstName],
-      lastName:[this.user.lastName],
-      email:[this.user.email],
-
-    });
-
-  }
 
   update()
   {

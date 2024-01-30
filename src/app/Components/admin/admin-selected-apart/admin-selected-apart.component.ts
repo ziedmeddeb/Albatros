@@ -84,7 +84,7 @@ export class AdminSelectedApartComponent implements OnInit {
                 this.modifFormAdmin = this.fb.group({
                   firstName: [this.user.firstName],
                   lastName: [this.user.lastName],
-                  cin: [this.user.cin],
+                  
                   ntel: [this.user.ntel],
                   
                   status: [this.user.status],
@@ -104,7 +104,6 @@ export class AdminSelectedApartComponent implements OnInit {
     this.reservForm = this.fb.group({
       firstName: [''],
       lastName: [''],
-      cin: [''],
       ntel: [''],
       dateRes:new Date(Date.now()),
       status: [''],
@@ -132,7 +131,7 @@ export class AdminSelectedApartComponent implements OnInit {
             appartement:this.idApart,
             status:"En cours",
             remarque:"",
-            cin:this.users[i].reser.cin,
+           
             
             ntel:this.users[i].reser.ntel,
             date:this.datede
@@ -174,7 +173,7 @@ export class AdminSelectedApartComponent implements OnInit {
         firstName: this.reservForm.value.firstName,
         lastName: this.reservForm.value.lastName,
         appartement: this.idApart,
-        cin: this.reservForm.value.cin,
+        
         dateRes: this.reservForm.value.dateRes,
         ntel: this.reservForm.value.ntel,
         date: this.datede,
@@ -223,7 +222,7 @@ export class AdminSelectedApartComponent implements OnInit {
     
     this.serviceRes.updateReserve(this.users[0].reser._id,{
     firstName: this.users[0].user.firstName,lastName: this.users[0].user.lastName,
-    cin: this.users[0].user.cin,
+  
     ntel: this.users[0].user.ntel,status:this.modifForm.value.status,
     remarque:this.modifForm.value.remarque
     }).subscribe((data) => {

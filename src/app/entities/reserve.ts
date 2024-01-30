@@ -4,7 +4,6 @@ export class Reserve {
         public appartement:string,
         public user:string,
         public date:Date,
-        public cin:string,
         public dateRes:Date,
         public ntel:string,
         public remarque:string,

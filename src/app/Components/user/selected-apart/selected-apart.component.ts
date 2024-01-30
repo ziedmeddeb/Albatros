@@ -58,11 +58,7 @@ export class SelectedApartComponent implements OnInit {
         
       });
     
-      this.reservForm=this.fb.nonNullable.group({
-        cin:[''],
-        
-        ntel:['']
-      });
+     
 
 
     
@@ -82,20 +78,15 @@ export class SelectedApartComponent implements OnInit {
   {
     if(localStorage.getItem('userToken')!=null)
     {
-      if( this.reservForm.value.ntel.length!=8
-          )
-         {
-            alert("verifier les champs");
-            
-         }
-         else
-         {
+      
+        
+         
           this.userService.getUserById(this.jwt.decodeToken(localStorage.getItem('userToken')!)['_id']).subscribe(data=>{
             this.user=data;
           
-      this.reserveService.createReserve({cin:this.reservForm.value.cin,
+      this.reserveService.createReserve({
         firstName:this.user.firstName,lastName:this.user.lastName,
-        dateRes:new Date(Date.now()),ntel:this.reservForm.value.ntel,
+        dateRes:new Date(Date.now()),ntel:this.user.ntel,
         date:this.selectedCell.dateDeb,
         code:this.Apart.code,
         appartement:this.idAp,user:this.jwt.decodeToken(localStorage.getItem('userToken')!)['_id']}).subscribe(data=>{
@@ -105,7 +96,7 @@ export class SelectedApartComponent implements OnInit {
         }
         );
       });
-      }
+      
       }
       else{
         this.router.navigate(['/login']);
