@@ -35,7 +35,9 @@ export class RegisterComponent implements OnInit {
       else if(this.userForm.value['password'].length<8)
       {
         alert("le mot de passe doit contenir au moins 8 caractères")
-      }
+      } 
+      
+      
       else
       {
       this.serviceUser.register(this.userForm.value).subscribe(data=>{
