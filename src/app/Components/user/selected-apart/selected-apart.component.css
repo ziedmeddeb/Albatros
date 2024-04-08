@@ -313,3 +313,22 @@ ngb-rating {
 .check-list i {
   margin-right: 8px; /* Adjust spacing between icon and text */
 }
+
+.calender-div {
+  margin: 0 auto;
+  width: 100%; /* Make it full width by default */
+}
+
+/* Apply different styles for screens larger than 768px (typical breakpoint for tablets and larger devices) */
+@media screen and (min-width: 768px) {
+  .calender-div {
+    width: 75%; /* Use a larger width for larger screens */
+  }
+}
+
+/* Apply different styles for screens larger than 992px (typical breakpoint for desktops and larger devices) */
+@media screen and (min-width: 992px) {
+  .calender-div {
+    width: 50%; /* Use the original width for desktop screens */
+  }
+}

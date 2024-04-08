@@ -29,6 +29,7 @@ import { SelectedApartColabComponent } from './Components/colab/selected-apart-c
 import { SiteArchComponent } from './Components/user/site-arch/site-arch.component';
 import { LoisirComponent } from './Components/user/loisir/loisir.component';
 import { SwPush, ServiceWorkerModule } from '@angular/service-worker';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 
 
@@ -76,6 +77,7 @@ import { SwPush, ServiceWorkerModule } from '@angular/service-worker';
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
+    FullCalendarModule
     
     
     

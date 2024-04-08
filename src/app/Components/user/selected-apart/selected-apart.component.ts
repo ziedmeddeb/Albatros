@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -10,7 +10,10 @@ import { CalendrierService } from 'src/app/services/calendrier.service';
 import { ImageService } from 'src/app/services/image.service';
 import { ReserveService } from 'src/app/services/reserve.service';
 import { UserService } from 'src/app/services/user.service';
-
+import { CalendarOptions } from '@fullcalendar/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import { an } from '@fullcalendar/core/internal-common';
+// import frLocale from "@fullcalendar/core/locales/fr";
 @Component({
   selector: 'app-selected-apart',
   templateUrl: './selected-apart.component.html',
@@ -27,6 +30,7 @@ export class SelectedApartComponent implements OnInit {
   jwt=new JwtHelperService();
   selectedBox!: HTMLElement;
   user!:any;
+  events:any[]=[];
   
  
   constructor(private activatedRoute: ActivatedRoute,
@@ -35,7 +39,18 @@ export class SelectedApartComponent implements OnInit {
     private reserveService:ReserveService,
     private fb:FormBuilder,
     private router:Router,
-    private userService:UserService) { }
+    private userService:UserService,
+    private cdr:ChangeDetectorRef) { }
+    calendarOptions: CalendarOptions = {
+
+      plugins: [dayGridPlugin],
+      initialView: 'dayGridMonth',
+      locale:'fr',
+      displayEventTime: false,
+      initialDate: new Date(new Date().getFullYear(), 5),
+      eventClick: this.handleEventClick.bind(this),
+      events: []
+    };
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
@@ -54,7 +69,30 @@ export class SelectedApartComponent implements OnInit {
     
    
       this.serviceCalen.getCalendrierByApartId(this.idAp).subscribe(data => {
-        this.calender = data; // Accessing the 'data' property of the response
+        this.calender = data; 
+        console.log(this.calender);
+        
+        for(let i=0;i<this.calender.availabilities.length;i++)
+        {
+          let color = this.calender.availabilities[i].available ? '#76F467' : '#F94C46';
+        console.log("dateee",this.calender.availabilities[i].dateDeb)
+          this.events.push({ 
+            title: this.calender.availabilities[i].available ? 'Disponible' : 'Non disponible', 
+            start: new Date(this.calender.availabilities[i].dateDeb), 
+            end : new Date(this.calender.availabilities[i].dateFin), 
+            backgroundColor: color,            
+
+             
+            
+          });
+        }
+        this.calendarOptions = {
+          ...this.calendarOptions,
+          events: this.events,
+        };
+        this.cdr.detectChanges();
+        console.log("eventtss",this.calendarOptions.events);
+        
         
       });
     
@@ -62,7 +100,7 @@ export class SelectedApartComponent implements OnInit {
 
 
     
-    
+      console.log("eventtss11",this.calendarOptions.events);
 
     
   }
@@ -113,6 +151,14 @@ export class SelectedApartComponent implements OnInit {
 
     element.classList.add('selectedC'); // ajoute la classe 'selectedC' à l'élément DOM qui a été cliqué
   }
-  
+  handleEventClick(arg:any){
+    console.log(arg.event.start , ' ', arg.event.end);
+    this.showForm=true;
+   
+
+  }
+
+
+ 
 
 }
