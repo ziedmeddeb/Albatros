@@ -146,18 +146,19 @@ html, body {
 
 
 .formbold-main-wrapper {
+  
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 48px;
+  
 }
 
 .formbold-form-wrapper {
   margin: 0 auto;
-  max-width: 100%;
-  width: 100%;
+  /* max-width: 100%; */
+
   background: white;
-  padding: 40px;
+  
 }
 
 .formbold-img {
@@ -292,6 +293,10 @@ ngb-rating {
 .legende {
   display: flex;
   align-items: center;
+  margin-bottom: 10px;
+  justify-content: center;
+  width: 100%;
+  
 }
 
 .tableReserv {
@@ -315,20 +320,37 @@ ngb-rating {
 }
 
 .calender-div {
-  margin: 0 auto;
-  width: 100%; /* Make it full width by default */
+ 
+  width: 100%;
+  height: 100%; /* Make it full width by default */
 }
 
 /* Apply different styles for screens larger than 768px (typical breakpoint for tablets and larger devices) */
 @media screen and (min-width: 768px) {
   .calender-div {
-    width: 75%; /* Use a larger width for larger screens */
+    width: 75%; 
   }
 }
 
 /* Apply different styles for screens larger than 992px (typical breakpoint for desktops and larger devices) */
 @media screen and (min-width: 992px) {
   .calender-div {
-    width: 50%; /* Use the original width for desktop screens */
+    width: 50%; 
   }
+}
+
+.lengend-div{
+  margin: 0 auto;
+  width: 100%;
+}
+
+
+.container-cal {
+  max-width: 1200px;
+  height: 80%;
+  margin: 0 auto;
+  padding: 15px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }

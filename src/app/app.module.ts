@@ -30,9 +30,7 @@ import { SiteArchComponent } from './Components/user/site-arch/site-arch.compone
 import { LoisirComponent } from './Components/user/loisir/loisir.component';
 import { SwPush, ServiceWorkerModule } from '@angular/service-worker';
 import { FullCalendarModule } from '@fullcalendar/angular';
-
-
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -65,6 +63,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 
   ],
   imports: [
+   
     BrowserModule,
     AppRoutingModule,
    
@@ -77,7 +76,10 @@ import { FullCalendarModule } from '@fullcalendar/angular';
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
-    FullCalendarModule
+    FullCalendarModule,
+   
+    BrowserAnimationsModule,
+
     
     
     

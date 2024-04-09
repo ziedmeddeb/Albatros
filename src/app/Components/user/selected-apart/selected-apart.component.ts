@@ -31,7 +31,8 @@ export class SelectedApartComponent implements OnInit {
   selectedBox!: HTMLElement;
   user!:any;
   events:any[]=[];
-  
+  selectedDate!:any;  
+  selectedDateDeb!:any; 
  
   constructor(private activatedRoute: ActivatedRoute,
     private serviceApart:AppartementService,private imageService:ImageService
@@ -49,7 +50,9 @@ export class SelectedApartComponent implements OnInit {
       displayEventTime: false,
       initialDate: new Date(new Date().getFullYear(), 5),
       eventClick: this.handleEventClick.bind(this),
-      events: []
+      events: [
+       
+      ]
     };
 
   ngOnInit(): void {
@@ -63,6 +66,10 @@ export class SelectedApartComponent implements OnInit {
       }
       );
       
+    },
+    (error)=>{
+      console.log("error");
+    
     }
     
       );
@@ -80,7 +87,9 @@ export class SelectedApartComponent implements OnInit {
             title: this.calender.availabilities[i].available ? 'Disponible' : 'Non disponible', 
             start: new Date(this.calender.availabilities[i].dateDeb), 
             end : new Date(this.calender.availabilities[i].dateFin), 
-            backgroundColor: color,            
+            backgroundColor: color, 
+            
+
 
              
             
@@ -94,6 +103,10 @@ export class SelectedApartComponent implements OnInit {
         console.log("eventtss",this.calendarOptions.events);
         
         
+      },
+      (error)=>{
+        console.log("error");
+      
       });
     
      
@@ -105,10 +118,16 @@ export class SelectedApartComponent implements OnInit {
     
   }
 
-  show(c:any){
-    this.selectedCell = c;
+  show(){
+    // this.selectedCell = c;
     
     this.showForm=true;
+    setTimeout(() => {
+      const element = document.getElementById('reserve');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 0); 
     
   }
   
@@ -125,7 +144,7 @@ export class SelectedApartComponent implements OnInit {
       this.reserveService.createReserve({
         firstName:this.user.firstName,lastName:this.user.lastName,
         dateRes:new Date(Date.now()),ntel:this.user.ntel,
-        date:this.selectedCell.dateDeb,
+        date:this.selectedDateDeb,
         code:this.Apart.code,
         appartement:this.idAp,user:this.jwt.decodeToken(localStorage.getItem('userToken')!)['_id']}).subscribe(data=>{
         
@@ -133,6 +152,10 @@ export class SelectedApartComponent implements OnInit {
           
         }
         );
+      },
+      (error)=>{
+        console.log("error");
+      
       });
       
       }
@@ -153,7 +176,18 @@ export class SelectedApartComponent implements OnInit {
   }
   handleEventClick(arg:any){
     console.log(arg.event.start , ' ', arg.event.end);
-    this.showForm=true;
+    let dateDeb = new Date(arg.event.start) ;
+   
+
+    let dateFin = new Date(arg.event.end);
+    dateFin.setDate(dateFin.getDate() - 1);
+   this.selectedDateDeb=new Date(arg.event.start)
+
+    
+    let formattedDateStart = dateDeb.toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    let formattedDateEnd = dateFin.toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    this.selectedDate = formattedDateStart + ' - ' + formattedDateEnd;
+    this.show();
    
 
   }

@@ -113,17 +113,20 @@
   </div>
   
 </main>
-<div>
-<div class="legende" style="margin-top: 60px;">
-<div class="green"></div> Disponible
 
-  <div class="red"></div> Non Disponible
 
-</div>
 <br>
-<p>Appuyez sur une date disponible pour reserver ou appelez <a href="tel:98271425">98271425</a> </p>
+<h6 style="padding-left: 10%;">Appuyez sur une date disponible pour reserver ou appelez <a href="tel:98271425">98271425</a> </h6>
 <br>
-<div class="table-responsive">
+<h2 style="padding-left: 10%;">Calendrier</h2>
+<br>
+<!-- <div class="legende" >
+  <div class="green"></div> Disponible
+  
+    <div class="red"></div> Non Disponible
+  
+  </div> -->
+<!-- <div class="table-responsive">
 <table class="table table-bordered" style="border:1px solid black">
   <thead>
     <tr>
@@ -140,7 +143,7 @@
      class="boxInfo"
      
      [ngClass]="{'available': c.available, 'not-available': !c.available}"
-      style="border:1px solid black;cursor: pointer;" (click)="show(c)" 
+      style="border:1px solid black;cursor: pointer;" (click)="show()" 
       (click)="onBoxClick($event)"
       
       > </td>
@@ -149,11 +152,15 @@
    
   </tbody>
 </table>
-</div>
+</div> -->
+
+<div class="container-cal">
+<div class="calender-div"><full-calendar [options]="calendarOptions" ></full-calendar></div>
 
 <div
+id="reserve"
   class="formbold-main-wrapper"
-  style="margin-top: 0% !important; width: 97% !important"
+  style="margin-top: 20px !important"
   *ngIf="showForm"
 >
   <!-- Author: FormBold Team -->
@@ -162,7 +169,7 @@
     
       <div class="formbold-form-title">
         <h2 class="">Réserver</h2>
-        <p>Date : {{selectedCell.dateDeb | date:'dd-MM'}} au {{selectedCell.dateFin | date:'dd-MM'}} </p>
+        <p>Date : {{selectedDate}} </p>
       </div>
 
       
@@ -180,6 +187,8 @@
     
   </div>
 </div>
-<div class="calender-div"><full-calendar [options]="calendarOptions"></full-calendar></div>
-
 </div>
+
+
+
+

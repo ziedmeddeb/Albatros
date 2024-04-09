@@ -5,6 +5,9 @@ import { AppartementService } from 'src/app/services/appartement.service';
 import { CalendrierService } from 'src/app/services/calendrier.service';
 import { SwPush } from '@angular/service-worker';
 import { NotificationService } from 'src/app/services/notification.service';
+import { CalendarOptions } from '@fullcalendar/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import { an } from '@fullcalendar/core/internal-common';
 
 
 @Component({
@@ -21,6 +24,16 @@ export class ListApartComponent implements OnInit {
       private _swPush:SwPush,
       private notifService:NotificationService) { }
 
+      calendarOptions: CalendarOptions = {
+
+        plugins: [dayGridPlugin],
+        initialView: 'dayGridMonth',
+        locale:'fr',
+        displayEventTime: false,
+        initialDate: new Date(new Date().getFullYear(), 5),
+        // eventClick: this.handleEventClick.bind(this),
+        events: []
+      };
     
   ngOnInit(): void {
 
