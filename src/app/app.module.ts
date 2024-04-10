@@ -70,11 +70,11 @@ import { CarouselModule } from 'primeng/carousel';
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
-    // ServiceWorkerModule.register('ngsw-worker.js', {
-    //   enabled: !isDevMode(),
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: !isDevMode(),
    
-    //   registrationStrategy: 'registerWhenStable:30000'
-    // }),
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
     FullCalendarModule,
    
     BrowserAnimationsModule,
@@ -86,7 +86,7 @@ import { CarouselModule } from 'primeng/carousel';
    
     
   ],
-  providers: [],
+  providers: [SwPush],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
