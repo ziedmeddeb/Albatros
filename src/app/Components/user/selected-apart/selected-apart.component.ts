@@ -73,6 +73,9 @@ export class SelectedApartComponent implements OnInit {
       this.imageService.getImagebyApartId(this.idAp).subscribe(data1=>{
         this.images=data1;
         
+      },
+      (error)=>{
+        console.log("error");
       }
       );
       
@@ -161,6 +164,9 @@ export class SelectedApartComponent implements OnInit {
         
           alert("demande de reservation a été envoyé avec succès");
           
+        },
+        (error)=>{
+          console.log("error");
         }
         );
       },

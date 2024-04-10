@@ -54,6 +54,9 @@ export class ListApartColabComponent implements OnInit {
         .catch(error => {
           console.error('Error retrieving calenders:', error);
         });
+    },
+    (error)=>{
+      console.log("error");
     });
   }
   disconnect(){

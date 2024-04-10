@@ -70,6 +70,9 @@ export class AdminSelectedApartComponent implements OnInit {
                   status: [this.users[0].reser.status],
                   remarque:[this.users[0].reser.remarque]
                 });
+              },
+              (error)=>{
+                console.log("error");
               });
             }
             else{
@@ -95,11 +98,18 @@ export class AdminSelectedApartComponent implements OnInit {
             this.reservations.forEach((element) => {
             this.serviceUser.getUserById(element.user).subscribe((data) => {
               this.users.push({ user: data, reser: element });
+            },
+            (error)=>{
+              console.log("error");
             });
           });
           }
         
-      });
+      },
+      (error)=>{
+        console.log("error");
+      }
+    );
 
     this.reservForm = this.fb.group({
       firstName: [''],
@@ -143,9 +153,18 @@ export class AdminSelectedApartComponent implements OnInit {
             }
           ).subscribe((data) => {
           window.location.reload();
+        },
+        (error)=>{
+          console.log("error");
         });
         
+      },
+      (error)=>{
+        console.log("error");
       });
+    },
+    (error)=>{
+      console.log("error");
     });
   }
 
@@ -159,11 +178,17 @@ export class AdminSelectedApartComponent implements OnInit {
       .subscribe((data) => {
         this.serviceRes.annulerReserv(this.users[0].reser._id).subscribe((data) => {
           
+        },
+        (error)=>{
+          console.log("error");
         });
         this.reserve1 = false;
         this.adminres = false;
         this.reserve = true;
         
+      },
+      (error)=>{
+        console.log("error");
       });
   }
 
@@ -193,7 +218,13 @@ export class AdminSelectedApartComponent implements OnInit {
               
               
                window.location.reload();
+            },
+            (error)=>{
+              console.log("error");
             });
+        },
+        (error)=>{
+          console.log("error");
         });
         
       
@@ -208,11 +239,17 @@ export class AdminSelectedApartComponent implements OnInit {
         this.serviceRes.annulerReserv(this.user._id).subscribe((data) => {
           
           
+        },
+        (error)=>{
+          console.log("error");
         });
         this.adminres = false;
         this.reserve1 = false;
         this.reserve = true;
         
+      },
+      (error)=>{
+        console.log("error");
       });
   }
 
@@ -232,7 +269,13 @@ export class AdminSelectedApartComponent implements OnInit {
         this.users[0].user.firstName + ' ' + this.users[0].user.lastName)
       .subscribe((data) => {
         window.location.reload();
+      },
+      (error)=>{
+        console.log("error");
       });
+    },
+    (error)=>{
+      console.log("error");
     });
   }
 
@@ -247,7 +290,13 @@ export class AdminSelectedApartComponent implements OnInit {
       .subscribe((data) => {
         
         window.location.reload();
+      },
+      (error)=>{
+        console.log("error");
       });
+    },
+    (error)=>{
+      console.log("error");
     });
   }
 
@@ -256,6 +305,9 @@ export class AdminSelectedApartComponent implements OnInit {
   {
     this.serviceRes.annulerReserv(id).subscribe((data) => {
       this.users=this.users.filter((elt)=>elt.reser._id!=id);
+    },
+    (error)=>{
+      console.log("error");
     });
   }
 }

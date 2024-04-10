@@ -30,6 +30,9 @@ export class ProfileComponent implements OnInit {
         ntel:[this.user.ntel],
   
       });
+    },
+    (error)=>{
+      console.log("error");
     });
     
 

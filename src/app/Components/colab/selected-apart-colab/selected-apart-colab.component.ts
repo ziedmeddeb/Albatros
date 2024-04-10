@@ -71,6 +71,9 @@ export class SelectedApartColabComponent implements OnInit {
                 this.adminres = false;
               }
               
+            },
+            (error)=>{
+              console.log("error");
             });
             
              this.reservForm = this.fb.group({
@@ -114,7 +117,13 @@ export class SelectedApartColabComponent implements OnInit {
              
               window.location.reload();
             });
+        },
+        (error)=>{
+          console.log("error");
         });
+      },
+      (error)=>{
+        console.log("error");
       });
       
       
@@ -128,11 +137,17 @@ export class SelectedApartColabComponent implements OnInit {
         this.serviceRes.annulerReserv(this.user._id).subscribe((data) => {
           
           
+        },
+        (error)=>{
+          console.log("error");
         });
         this.adminres = false;
         this.showForm = true;
         
         
+      },
+      (error)=>{
+        console.log("error");
       });
   }
 
@@ -147,7 +162,13 @@ export class SelectedApartColabComponent implements OnInit {
         this.modifFormAdmin.value.firstName + ' ' + this.modifFormAdmin.value.lastName)
       .subscribe((data) => {
         window.location.reload();
+      },
+      (error)=>{
+        console.log("error");
       });
+    },
+    (error)=>{
+      console.log("error");
     });
   }
 

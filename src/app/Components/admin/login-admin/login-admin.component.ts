@@ -32,6 +32,9 @@ export class LoginAdminComponent implements OnInit {
       this.router.navigate(['/admindash'])
 
       
+  },
+  (error)=>{
+    console.log("error");
   }
     )}
 
