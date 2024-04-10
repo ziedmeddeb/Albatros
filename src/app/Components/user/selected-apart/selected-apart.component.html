@@ -115,10 +115,12 @@
 </main>
 
 
+
 <br>
-<h6 style="padding-left: 10%;">Appuyez sur une date disponible pour reserver ou appelez <a href="tel:98271425">98271425</a> </h6>
+
+<h2 style="padding-left: 2%;">Calendrier</h2>
 <br>
-<h2 style="padding-left: 10%;">Calendrier</h2>
+<h6 style="padding-left: 2%;">Appuyez sur une date disponible pour réserver ou appelez <a href="tel:98271425">98271425</a> </h6>
 <br>
 <!-- <div class="legende" >
   <div class="green"></div> Disponible
@@ -153,9 +155,9 @@
   </tbody>
 </table>
 </div> -->
+<full-calendar [options]="calendarOptions" ></full-calendar>
 
-<div class="container-cal">
-<div class="calender-div"><full-calendar [options]="calendarOptions" ></full-calendar></div>
+<!-- <div class="calender-div"><full-calendar [options]="calendarOptions" ></full-calendar></div> -->
 
 <div
 id="reserve"
@@ -168,8 +170,12 @@ id="reserve"
   <div class="formbold-form-wrapper">
     
       <div class="formbold-form-title">
-        <h2 class="">Réserver</h2>
+        <h2 class="">Réservation</h2>
         <p>Date : {{selectedDate}} </p>
+        <p>Prix : {{prix}} dt</p>
+        <p> NB :   Entrée dimanche 14h00 / Sortie dimanche 10h00 du matin </p>
+       
+         
       </div>
 
       
@@ -186,7 +192,6 @@ id="reserve"
       </button>
     
   </div>
-</div>
 </div>
 
 

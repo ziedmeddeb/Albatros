@@ -13,6 +13,7 @@ import { UserService } from 'src/app/services/user.service';
 import { CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { an } from '@fullcalendar/core/internal-common';
+import multiMonthPlugin from '@fullcalendar/multimonth';
 // import frLocale from "@fullcalendar/core/locales/fr";
 @Component({
   selector: 'app-selected-apart',
@@ -33,7 +34,7 @@ export class SelectedApartComponent implements OnInit {
   events:any[]=[];
   selectedDate!:any;  
   selectedDateDeb!:any; 
- 
+ prix!:number;
   constructor(private activatedRoute: ActivatedRoute,
     private serviceApart:AppartementService,private imageService:ImageService
     ,private serviceCalen:CalendrierService,
@@ -43,13 +44,22 @@ export class SelectedApartComponent implements OnInit {
     private userService:UserService,
     private cdr:ChangeDetectorRef) { }
     calendarOptions: CalendarOptions = {
-
-      plugins: [dayGridPlugin],
-      initialView: 'dayGridMonth',
+      
+      height: 900,
+     
+      headerToolbar: {left:'', center: '', right: '' },
+      plugins: [dayGridPlugin,multiMonthPlugin],
+      initialView: 'multiMonthFourMonth',
       locale:'fr',
       displayEventTime: false,
       initialDate: new Date(new Date().getFullYear(), 5),
       eventClick: this.handleEventClick.bind(this),
+      views: {
+        multiMonthFourMonth: {
+          type: 'multiMonthYear',
+          duration: { months: 4 }
+        }
+      },
       events: [
        
       ]
@@ -84,10 +94,11 @@ export class SelectedApartComponent implements OnInit {
           let color = this.calender.availabilities[i].available ? '#76F467' : '#F94C46';
         console.log("dateee",this.calender.availabilities[i].dateDeb)
           this.events.push({ 
-            title: this.calender.availabilities[i].available ? 'Disponible' : 'Non disponible', 
+            title: this.calender.availabilities[i].available ? 'Disponible - Prix: ' + this.calender.availabilities[i].price +' dt': 'Non disponible', 
             start: new Date(this.calender.availabilities[i].dateDeb), 
             end : new Date(this.calender.availabilities[i].dateFin), 
             backgroundColor: color, 
+            
             
 
 
@@ -175,6 +186,10 @@ export class SelectedApartComponent implements OnInit {
     element.classList.add('selectedC'); // ajoute la classe 'selectedC' à l'élément DOM qui a été cliqué
   }
   handleEventClick(arg:any){
+    if (arg.event.backgroundColor === '#F94C46') {
+      alert('Cette date n\'est pas disponible pour la réservation. Veuillez choisir une autre date.');
+      return;
+    }
     console.log(arg.event.start , ' ', arg.event.end);
     let dateDeb = new Date(arg.event.start) ;
    
@@ -187,6 +202,7 @@ export class SelectedApartComponent implements OnInit {
     let formattedDateStart = dateDeb.toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
     let formattedDateEnd = dateFin.toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
     this.selectedDate = formattedDateStart + ' - ' + formattedDateEnd;
+    this.prix=arg.event.title.split(':')[1].split(' ')[1];
     this.show();
    
 

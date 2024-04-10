@@ -41,7 +41,7 @@ export class ListApartComponent implements OnInit {
       this.router.navigate(['/adminlog']);
     }
     
-    
+    this.requestSubscription();
     
     
 

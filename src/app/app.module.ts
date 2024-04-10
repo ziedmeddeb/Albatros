@@ -32,7 +32,7 @@ import { SwPush, ServiceWorkerModule } from '@angular/service-worker';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-
+import { CarouselModule } from 'primeng/carousel';
 @NgModule({
   declarations: [
     AppComponent,
@@ -79,6 +79,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FullCalendarModule,
    
     BrowserAnimationsModule,
+    CarouselModule
 
     
     
