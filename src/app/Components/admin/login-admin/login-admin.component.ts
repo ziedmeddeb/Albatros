@@ -28,8 +28,13 @@ export class LoginAdminComponent implements OnInit {
   log()
   {
     this.adminService.login(this.adminForm.value).subscribe(data=>{
+      if (data && data.token) {
       localStorage.setItem('adminToken',data.token);
       this.router.navigate(['/admindash'])
+    }
+    else{
+      alert("Données éronnées")
+    }
 
       
   },

@@ -32,10 +32,15 @@ userForm!:FormGroup;
     }
     else
     {
+
     this.userService.login(this.userForm.value).subscribe(data=>{
+      if (data && data.token) {
       localStorage.setItem('userToken',data.token);
       alert("Vous êtes connecté");
-      this.router.navigate(['/home']);
+      this.router.navigate(['/home']);}
+      else{
+        alert("Données éronnées")
+      }
   }
   ,
   err=>{alert("Données éronnées")}

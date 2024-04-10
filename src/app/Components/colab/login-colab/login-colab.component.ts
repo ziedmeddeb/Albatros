@@ -30,9 +30,14 @@ export class LoginColabComponent implements OnInit {
     else
     {
     this.colabService.login(this.colabForm.value).subscribe(data=>{
+      if (data && data.token) {
       localStorage.setItem('colabToken',data.token);
       alert("Vous êtes connecté");
       this.router.navigate(['/colabdash']);
+      }
+      else{
+        alert("Données éronnées")
+      }
   }
   ,
   err=>{alert("Données éronnées")}
