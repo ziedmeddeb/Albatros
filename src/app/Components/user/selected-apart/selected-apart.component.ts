@@ -14,6 +14,8 @@ import { CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { an } from '@fullcalendar/core/internal-common';
 import multiMonthPlugin from '@fullcalendar/multimonth';
+import listPlugin from '@fullcalendar/list';
+import { all } from 'axios';
 // import frLocale from "@fullcalendar/core/locales/fr";
 @Component({
   selector: 'app-selected-apart',
@@ -44,27 +46,39 @@ export class SelectedApartComponent implements OnInit {
     private userService:UserService,
     private cdr:ChangeDetectorRef) { }
     calendarOptions: CalendarOptions = {
+      height: 'auto', // Adjust the height based on the content
       
-      height: 900,
-     
-      headerToolbar: {left:'', center: '', right: '' },
-      plugins: [dayGridPlugin,multiMonthPlugin],
+      headerToolbar: { left: '', center: '', right: '' },
+      plugins: [multiMonthPlugin],
       initialView: 'multiMonthFourMonth',
-      locale:'fr',
+      locale: 'fr',
       displayEventTime: false,
       initialDate: new Date(new Date().getFullYear(), 5),
       eventClick: this.handleEventClick.bind(this),
+      dayMaxEvents: 1,
+      eventContent: function(arg) {
+        // Check if the screen width is less than 515px
+        if (window.innerWidth < 515) {
+          // Display only the first few characters of the event title
+          return { html: arg.event.title.substring(0, 26) };
+        } else {
+          // Display the full event title
+          return { html: arg.event.title };
+        }
+      },
       views: {
         multiMonthFourMonth: {
           type: 'multiMonthYear',
-          duration: { months: 4 }
+          duration: { months: 4 },
         }
       },
+      
+      
+    
       events: [
-       
+        // Your event data here
       ]
     };
-
   ngOnInit(): void {
     window.scrollTo(0, 0);
     this.idAp=this.activatedRoute.snapshot.params["id"];
@@ -100,6 +114,7 @@ export class SelectedApartComponent implements OnInit {
             title: this.calender.availabilities[i].available ? 'Disponible - Prix: ' + this.calender.availabilities[i].price +' dt': 'Non disponible', 
             start: new Date(this.calender.availabilities[i].dateDeb), 
             end : new Date(this.calender.availabilities[i].dateFin), 
+            allDay: true,
             backgroundColor: color, 
             
             
@@ -217,4 +232,5 @@ export class SelectedApartComponent implements OnInit {
 
  
 
+  
 }
