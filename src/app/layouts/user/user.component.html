@@ -12,20 +12,7 @@
               <a routerLink="zonesLoisir" class="nav-link" routerLinkActive="active" (click)="closeMenu()">Zones de loisir </a>
               <a routerLink="about" class="nav-link" routerLinkActive="active" (click)="closeMenu()">A propos</a>
               <a routerLink="contact" class="nav-link" routerLinkActive="active" (click)="closeMenu()">Contact</a>
-              <span class="nav-item" *ngIf="showSignin">
-                <a routerLink="login" class="nav-link" routerLinkActive="active">Login</a>
-              </span>
-              <div class="nav-item dropdown" *ngIf="!showSignin">
-                
-                <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="fa-solid fa-user"></i>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="profileDropdown">
-                  <button class="dropdown-item" style="border: 0;" routerLink="profile">Profile</button>
-                  <button class="dropdown-item" routerLink="changePass" >Changer mot de passe</button>
-                  <button class="dropdown-item" (click)="Disconnect()">Déconnecter</button>
-                </div>
-              </div>
+            
             </ul>
           </div>
           
@@ -33,16 +20,6 @@
     </div>
 </nav>
 <!-- END nav -->
-<section class="hero-wrap hero-wrap-2 js-fullheight hro" style="background-image: url('../../../assets/images/bhar1.jpg');">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
-        <div class="col-md-9  pb-5 text-center">
-         
-       </div>
-     </div>
-   </div>
-  </section>
 
   <router-outlet></router-outlet>
 

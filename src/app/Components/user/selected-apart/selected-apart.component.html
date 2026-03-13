@@ -165,31 +165,36 @@ id="reserve"
   style="margin-top: 20px !important"
   *ngIf="showForm"
 >
-  <!-- Author: FormBold Team -->
-  <!-- Learn More: https://formbold.com -->
   <div class="formbold-form-wrapper">
     
       <div class="formbold-form-title">
-        <h2 class="">Réservation</h2>
+        <h2 class="">Demande de Réservation</h2>
         <p>Date : {{selectedDate}} </p>
         <p>Prix : {{prix}} dt</p>
-        <p> NB :   Entrée dimanche 14h00 / Sortie dimanche 10h00 du matin </p>
-       
-         
+        <p> NB : Entrée dimanche 14h00 / Sortie dimanche 10h00 du matin </p>
       </div>
 
-      
+      <form [formGroup]="demandForm" (ngSubmit)="envoyerDemande()">
+        <div class="formbold-input-flex">
+          <div>
+            <label class="formbold-form-label">Nom complet</label>
+            <input type="text" class="formbold-form-input" formControlName="nom" placeholder="Votre nom complet" />
+          </div>
+          <div>
+            <label class="formbold-form-label">Numéro de téléphone</label>
+            <input type="tel" class="formbold-form-input" formControlName="ntel" placeholder="Votre numéro" />
+          </div>
+        </div>
 
-      
-
-      <button
-        class="formbold-btn"
-        type="submit"
-        style="background-color: rgb(147, 147, 255)"
-        (click)="reserver()"
-      >
-        Réserver
-      </button>
+        <button
+          class="formbold-btn"
+          type="submit"
+          style="background-color: rgb(147, 147, 255)"
+          [disabled]="demandForm.invalid"
+        >
+          Envoyer la demande
+        </button>
+      </form>
     
   </div>
 </div>

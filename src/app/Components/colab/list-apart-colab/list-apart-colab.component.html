@@ -1,69 +1,92 @@
-
-<a  style="margin-left: 80%;" class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-  <i class="fa-solid fa-user"></i>
-</a>
-<div class="dropdown-menu" aria-labelledby="profileDropdown" style="right: 0px;">
-  
-  <button class="dropdown-item" (click)="disconnect()">Déconnecter</button>
-</div>
-
-<div>
-    <div class="legende" style="margin-top: 60px;">
-    <div class="green legend-item"></div> Disponible
-    
-      
-
-      <div class="orange legend-item"></div> En cours
-
-      <div class="red legend-item" ></div> Payé
-
-      <div class="cyan legend-item"></div> Avance
-
-      <div class="black legend-item"></div> Amicale
-
-    
+<div class="dashboard-container">
+  <!-- Header Section -->
+  <div class="dashboard-header">
+    <h1 class="page-title">
+      <i class="fa-solid fa-calendar-days"></i>
+      Mes Réservations
+    </h1>
+    <div class="user-menu">
+      <button class="user-btn" (click)="disconnect()">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        Déconnexion
+      </button>
     </div>
+  </div>
+
+  <!-- Legend Card -->
+  <div class="legend-card">
+    <h3 class="legend-title">Légende des statuts</h3>
+    <div class="legend-items">
+      <div class="legend-item">
+        <span class="legend-dot available"></span>
+        <span class="legend-text">Disponible</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-dot in-progress"></span>
+        <span class="legend-text">En cours</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-dot paid"></span>
+        <span class="legend-text">Payé</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-dot avance"></span>
+        <span class="legend-text">Avance</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-dot amicale"></span>
+        <span class="legend-text">Amicale</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Table -->
+  <div class="table-card">
     <div class="table-responsive">
-    <table class="table table-bordered" style="border:1px solid black">
-      <thead>
-        <tr>
-          
-          <th style="border:1px solid black"></th>
-          <th style="border: 1px solid black">Description</th>
-          <th *ngFor="let c of availabilities " style="border:1px solid black;"
-          
-          >{{c?.dateDeb | date:'dd-MM'}} au {{c?.dateFin | date:'dd-MM'}}</th>
-          
-          
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let a of calenders">
-          
-          <td style="border: 1px solid black">{{ a?.appartement.code }}</td>
-          <td style="border: 1px solid black">
-          {{a?.appartement.description}}
-          </td>
-          <ng-container *ngFor="let availability of a.calendrier.availabilities">
-            <td
-              class="boxInfo"
-              [ngClass]="{ 'available': availability.available,
-              'paid': availability.status === 'Payé',
-              'in-progress': availability.status === 'En cours',
-              'amicale': availability.status === 'Amicale',
-              'avance': availability.status === 'Avance',
-            'not-mine' : availability.persId !== '' && availability.persId !== colaborateur  }"
-              style="border: 1px solid white; cursor: pointer;"
-              
-             [routerLink]="['../colabApart',a?.appartement._id,availability.dateDeb,availability._id,availability.dateFin,a?.appartement.code]"
-            >
-            <span *ngIf="availability.persId == colaborateur && availability.nom != ''"> {{availability.nom}}</span>
-            <span *ngIf="availability.nom == ''"> {{availability.price}}   </span>
-
-            
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th class="sticky-col code-col">Code</th>
+            <th class="sticky-col desc-col">Description</th>
+            <th *ngFor="let c of availabilities" class="date-col">
+              <div class="date-header">
+                <span class="date-range">{{c?.dateDeb | date:'dd/MM'}}</span>
+                <span class="date-separator">→</span>
+                <span class="date-range">{{c?.dateFin | date:'dd/MM'}}</span>
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let a of calenders">
+            <td class="sticky-col code-col">
+              <span class="apartment-code">{{ a?.appartement.code }}</span>
             </td>
-          </ng-container>
-        </tr>
-      </tbody>
-    </table>
+            <td class="sticky-col desc-col">
+              <span class="apartment-desc">{{a?.appartement.description}}</span>
+            </td>
+            <ng-container *ngFor="let availability of a.calendrier.availabilities">
+              <td class="status-cell"
+                  [ngClass]="{ 
+                    'available': availability.available,
+                    'paid': availability.status === 'Payé',
+                    'in-progress': availability.status === 'En cours',
+                    'amicale': availability.status === 'Amicale',
+                    'avance': availability.status === 'Avance',
+                    'not-mine': availability.persId !== '' && availability.persId !== colaborateur
+                  }"
+                  [routerLink]="['../colabApart',a?.appartement._id,availability.dateDeb,availability._id,availability.dateFin,a?.appartement.code]">
+                <span *ngIf="availability.persId == colaborateur && availability.nom != ''" class="cell-content">
+                  {{availability.nom}}
+                </span>
+                <span *ngIf="availability.nom == ''" class="cell-content price-only">
+                  {{availability.price}} DT
+                </span>
+              </td>
+            </ng-container>
+          </tr>
+        </tbody>
+      </table>
     </div>
+  </div>
+</div>

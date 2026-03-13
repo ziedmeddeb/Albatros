@@ -1,59 +1,133 @@
-<button (click)="this.requestSubscription()">Subscribe</button>
-<div>
-    <div class="legende" style="margin-top: 60px;">
-    <div class="green"></div> Disponible
-    
-      
-
-      <div class="orange"></div> En cours
-
-      <div class="red"></div> Payé
-
-      <div class="cyan"></div> Avance
-
-      <div class="black"></div> Amicale
-
-    
+<div class="dashboard-container">
+  <!-- Header Section -->
+  <div class="dashboard-header">
+    <h1 class="page-title">
+      <i class="fa-solid fa-calendar-days"></i>
+      Tableau de Bord
+    </h1>
+    <div class="header-actions">
+      <button class="action-btn colab-btn" (click)="openColabModal()">
+        <i class="fa-solid fa-user-plus"></i>
+        Créer Collaborateur
+      </button>
+      <button class="subscribe-btn" (click)="this.requestSubscription()">
+        <i class="fa-solid fa-bell"></i>
+        Activer les notifications
+      </button>
     </div>
+  </div>
+
+  <!-- Colab Creation Modal -->
+  <div class="modal-overlay" *ngIf="showColabModal" (click)="closeColabModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2><i class="fa-solid fa-user-plus"></i> Créer un Collaborateur</h2>
+        <button class="close-btn" (click)="closeColabModal()">
+          <i class="fa-solid fa-times"></i>
+        </button>
+      </div>
+      <form [formGroup]="colabForm" (ngSubmit)="createColab()" class="modal-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Prénom</label>
+            <input type="text" class="form-input" formControlName="firstName" placeholder="Prénom" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Nom</label>
+            <input type="text" class="form-input" formControlName="lastName" placeholder="Nom" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Identifiant</label>
+          <input type="text" class="form-input" formControlName="identifiant" placeholder="Identifiant de connexion" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Mot de passe</label>
+          <input type="password" class="form-input" formControlName="password" placeholder="Mot de passe" />
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="cancel-btn" (click)="closeColabModal()">Annuler</button>
+          <button type="submit" class="submit-btn" [disabled]="colabForm.invalid">Créer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Legend Card -->
+  <div class="legend-card">
+    <h3 class="legend-title">Légende des statuts</h3>
+    <div class="legend-items">
+      <div class="legend-item">
+        <span class="legend-dot available"></span>
+        <span class="legend-text">Disponible</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-dot in-progress"></span>
+        <span class="legend-text">En cours</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-dot paid"></span>
+        <span class="legend-text">Payé</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-dot avance"></span>
+        <span class="legend-text">Avance</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-dot amicale"></span>
+        <span class="legend-text">Amicale</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Table -->
+  <div class="table-card">
     <div class="table-responsive">
-    <table class="table table-bordered" style="border:1px solid white">
-      <thead>
-        <tr>
-          
-          <th style="border:1px solid black"></th>
-          <th style="border: 1px solid black">Description</th>
-          <th *ngFor="let c of availabilities " style="border:1px solid black;cursor: pointer;"
-          [routerLink]="['../listReser',c?.dateDeb,c?.dateFin]"
-          >{{c?.dateDeb | date:'dd-MM'}} au {{c?.dateFin | date:'dd-MM'}}</th>
-          
-          
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let a of calenders">
-          
-          <td style="border: 1px solid black">{{ a?.appartement.code }}</td>
-          <td style="border: 1px solid black">
-          {{a?.appartement.description}}
-          </td>
-          <ng-container *ngFor="let availability of a.calendrier.availabilities">
-            <td
-              class="boxInfo"
-              [ngClass]="{ 'available': availability.available,
-              'paid': availability.status === 'Payé',
-              'in-progress': availability.status === 'En cours',
-              'amicale': availability.status === 'Amicale',
-              'avance': availability.status === 'Avance'}"
-              style="border: 1px solid white; cursor: pointer;"
-             [routerLink]="['../adminSelectedApart',a?.appartement._id,availability.dateDeb,availability._id,availability.dateFin,a?.appartement.code]"
-            >
-            <span *ngIf="availability.nom != ''"> {{availability.nom}} - {{availability.price}}</span>
-            <span *ngIf="availability.nom == ''">{{availability.price}}</span>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th class="sticky-col code-col">Code</th>
+            <th class="sticky-col desc-col">Description</th>
+            <th *ngFor="let c of availabilities" class="date-col"
+                [routerLink]="['../listReser',c?.dateDeb,c?.dateFin]">
+              <div class="date-header">
+                <span class="date-range">{{c?.dateDeb | date:'dd/MM'}}</span>
+                <span class="date-separator">→</span>
+                <span class="date-range">{{c?.dateFin | date:'dd/MM'}}</span>
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let a of calenders">
+            <td class="sticky-col code-col">
+              <span class="apartment-code">{{ a?.appartement.code }}</span>
             </td>
-          </ng-container>
-        </tr>
-      </tbody>
-    </table>
+            <td class="sticky-col desc-col">
+              <span class="apartment-desc">{{a?.appartement.description}}</span>
+            </td>
+            <ng-container *ngFor="let availability of a.calendrier.availabilities">
+              <td class="status-cell"
+                  [ngClass]="{ 
+                    'available': availability.available,
+                    'paid': availability.status === 'Payé',
+                    'in-progress': availability.status === 'En cours',
+                    'amicale': availability.status === 'Amicale',
+                    'avance': availability.status === 'Avance'
+                  }"
+                  [routerLink]="['../adminSelectedApart',a?.appartement._id,availability.dateDeb,availability._id,availability.dateFin,a?.appartement.code]">
+                <span *ngIf="availability.nom != ''" class="cell-content">
+                  {{availability.nom}}
+                  <span class="price-badge">{{availability.price}} DT</span>
+                </span>
+                <span *ngIf="availability.nom == ''" class="cell-content price-only">
+                  {{availability.price}} DT
+                </span>
+              </td>
+            </ng-container>
+          </tr>
+        </tbody>
+      </table>
     </div>
-
-   
+  </div>
+</div>

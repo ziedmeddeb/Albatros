@@ -1,256 +1,249 @@
-<br>
-<i class="fa-solid fa-arrow-left fa-xl" routerLink="/admindash" style="position: relative;left: 20px;cursor: pointer;"></i>
-<h1 style="text-align: center;margin: 5%;">{{cod}} : {{datede | date:'dd/MM'}} au {{dateFin | date:'dd/MM'}}</h1>
-<div *ngIf="reserve">
+<div class="detail-container">
+  <!-- Back Button & Header -->
+  <div class="detail-header">
+    <button class="back-btn" routerLink="/admindash">
+      <i class="fa-solid fa-arrow-left"></i>
+      Retour
+    </button>
+    <div class="header-info">
+      <h1 class="page-title">{{cod}}</h1>
+      <span class="date-badge">
+        <i class="fa-regular fa-calendar"></i>
+        {{datede | date:'dd/MM'}} au {{dateFin | date:'dd/MM'}}
+      </span>
+    </div>
+  </div>
 
-<i class="fa-regular fa-square-plus fa-xl" style="float:right;margin:20px ;cursor: pointer;"
-(click)="show()"></i>
-<div class="table-responsive">
-<table class="table table-hover">
-    <thead>
-      <tr>
-        
-        <th>Firstname</th>
-        <th>Lastname</th>
-        
-        
-        <th>Telephone</th>
-        <th>Date demande</th>
-        <th>Actions</th>
-        
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let u of users;index as i">
-        
-        <td>{{u.user.firstName}}</td>
-        <td>{{u.user.lastName}}</td>
-        
-        
-        <td>{{u.reser.ntel}}</td>
-        <td>{{u.reser.dateRes | date:'dd MMMM'}}</td>
-        <td>
-          <button style="margin:5px" type="button" class="btn btn-danger" (click)="supprim(u.reser._id)" >Supprimer</button>
-          <button  style="margin:5px" type="button" class="btn btn-primary" (click)="confirmRes(u.user._id,u.reser._id,i)">Confirmer</button>
-        </td>
-      </tr>
-      
-      
-    </tbody>
-  </table>
-</div>
-
-<div
- 
-  style="margin-top: 0% !important; width: 100% !important"
-  *ngIf="showForm"
->
-  <!-- Author: FormBold Team -->
-  <!-- Learn More: https://formbold.com -->
-  <div class="formbold-form-wrapper">
-    <form  [formGroup]="reservForm" (ngSubmit)="reser()">
-      <div class="formbold-form-title">
-        <h2 class="">Réserver</h2>
-        <p> </p>
-      </div>
-
-      
-        
-        <label for="address" class="formbold-form-label">Prénom </label>
-        <input
-          type="text"
-          name="address"
-          id="address"
-          
-          formControlName="firstName"
-          
-        />
-      
-
-      
-        
-        <label for="address" class="formbold-form-label">Nom </label>
-        <input
-          type="text"
-          name="address"
-          id="address"
-         
-          formControlName="lastName"
-          
-        />
-      
-
-      
-
-      
-        
-      
-      
-
-    
-        
-        <label for="address" class="formbold-form-label">N° Telephone </label>
-        <input
-          type="text"
-          name="address"
-          id="address"
-         
-          formControlName="ntel"
-          
-        />
-      
-      
-        
-       
-
-      <div class="formbold-mb-3">
-        
-        <label for="address" class="formbold-form-label">Etat </label>
-        <label>
-          <input name="status" type="radio" value="Amicale" formControlName="status">
-          Amicale
-        </label>
-      
-        <label>
-          <input name="status" type="radio" value="Avance" formControlName="status">
-          Avance
-        </label>
-      
-        <label>
-          <input name="status" type="radio" value="Payé" formControlName="status">
-          Payé
-        </label>
-
-        <label>
-          <input name="status" type="radio" value="En cours" formControlName="status">
-          En cours
-        </label>
-      </div>
-
-      <label for="remarque">Remarque: </label>
-        <input type="text" formControlName="remarque">
-        <br>
-
-      
-
-      <button
-        class="formbold-btn"
-        type="submit"
-        style="background-color: rgb(147, 147, 255)"
-      >
-        Confirm
+  <!-- Pending Reservations Section -->
+  <div *ngIf="reserve" class="section-card">
+    <div class="card-header">
+      <h2>
+        <i class="fa-solid fa-clock"></i>
+        Demandes en attente
+      </h2>
+      <button class="add-btn" (click)="show()">
+        <i class="fa-solid fa-plus"></i>
+        Nouvelle réservation
       </button>
-    </form>
-  </div>
-</div>
-</div>
-
-<div *ngIf="reserve1">
-<h1 style="text-align: center;margin: 5%;">Reservé pour  </h1>
-<p>Date demande : {{users[0]?.reser.dateRes | date:'dd MMMM'}}</p>
-<p>Prénom : {{users[0]?.user.firstName}}</p>
-
-         <p>Nom : {{users[0]?.user.lastName}}</p>
-        
-         
-         <p>Telephone : {{users[0]?.reser.ntel}}</p>
-        
-        <p>Etat : {{users[0]?.reser.status}}</p>
-<form [formGroup]="modifForm" (ngSubmit)="modif()">
-  <div class="formbold-mb-3">
-    <label for="address" class="formbold-form-label">Etat</label>
-    
-    <label>
-      <input name="status" type="radio" value="Amicale" formControlName="status">
-      Amicale
-    </label>
-  
-    <label>
-      <input name="status" type="radio" value="Avance" formControlName="status">
-      Avance
-    </label>
-  
-    <label>
-      <input name="status" type="radio" value="Payé" formControlName="status">
-      Payé
-    </label>
-
-    <label>
-      <input name="status" type="radio" value="En cours" formControlName="status">
-      En cours
-    </label>
-
-    
-  </div>
-  <label for="address" class="formbold-form-label">Remarque</label>
-  <label>
-    
-    <input type="text"  formControlName="remarque">
-    
-  </label>
-  <br>
-
-
-        <button type="button" type="submit" class="btn btn-success" >Modifier</button>
-      </form>
-
-        
-<br>
-
-        <button type="button" class="btn btn-danger" (click)="annuler()">Annuler</button>
-        
     </div>
 
+    <!-- Table of pending requests -->
+    <div class="table-responsive" *ngIf="users.length > 0">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Prénom</th>
+            <th>Nom</th>
+            <th>Téléphone</th>
+            <th>Date demande</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let u of users; index as i">
+            <td>{{u.user.firstName}}</td>
+            <td>{{u.user.lastName}}</td>
+            <td>{{u.reser.ntel}}</td>
+            <td>{{u.reser.dateRes | date:'dd MMMM'}}</td>
+            <td class="actions-cell">
+              <button class="action-btn danger" (click)="supprim(u.reser._id)">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+              <button class="action-btn success" (click)="confirmRes(u.user._id,u.reser._id,i)">
+                <i class="fa-solid fa-check"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-    <div *ngIf="adminres">
-     
-      <p>Reservé par : {{user?.nom}} </p>
-      <h3 style="text-align: center;margin: 5%;">Reservé pour  </h3>
-      <form [formGroup]="modifFormAdmin" (ngSubmit)="modifadmin()">
-        <table>
-          <tr>
-            <td>Date Reservation : {{user?.dateRes | date:'dd/MM'}}</td>
-          </tr>
-          <tr>
-            <td>Prénom:</td>
-            <td><input type="text" formControlName="firstName"></td>
-          </tr>
-          <tr>
-            <td>Nom:</td>
-            <td><input type="text" formControlName="lastName"></td>
-          </tr>
-          
-          <tr>
-            <td>Téléphone:</td>
-            <td><input type="text" formControlName="ntel"></td>
-          </tr>
-          
-        </table>
-      
-        <label for="status">Etat: </label>
-        <label>
-          <input type="radio" name="status" value="Amicale" formControlName="status"> Amicale
-        </label>
-        <label>
-          <input type="radio" name="status" value="Avance" formControlName="status"> Avance
-        </label>
-        <label>
-          <input type="radio" name="status" value="Payé" formControlName="status"> Payé
-        </label>
-        <label>
-          <input type="radio" name="status" value="En cours" formControlName="status"> En cours
-        </label>
-        
-        <br>
-        <label for="remarque">Remarque: </label>
-        <input type="text" formControlName="remarque">
-      <br>
-        <button type="submit" class="btn btn-success">Modifier</button>
-      </form>
-      
-              
-              <br>
-              <button type="button" class="btn btn-danger" (click)="annuler1()">Annuler</button>
-             
-              
+    <div *ngIf="users.length === 0 && !showForm" class="empty-state">
+      <i class="fa-regular fa-folder-open"></i>
+      <p>Aucune demande en attente</p>
+    </div>
+
+    <!-- New Reservation Form -->
+    <div class="form-card" *ngIf="showForm">
+      <h3 class="form-title">
+        <i class="fa-solid fa-calendar-plus"></i>
+        Nouvelle Réservation
+      </h3>
+      <form [formGroup]="reservForm" (ngSubmit)="reser()">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Prénom</label>
+            <input type="text" class="form-input" formControlName="firstName" placeholder="Entrez le prénom">
           </div>
+          <div class="form-group">
+            <label class="form-label">Nom</label>
+            <input type="text" class="form-input" formControlName="lastName" placeholder="Entrez le nom">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Téléphone</label>
+            <input type="text" class="form-input" formControlName="ntel" placeholder="Numéro de téléphone">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Statut</label>
+          <div class="radio-group">
+            <label class="radio-option">
+              <input type="radio" value="En cours" formControlName="status">
+              <span class="radio-label in-progress">En cours</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" value="Avance" formControlName="status">
+              <span class="radio-label avance">Avance</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" value="Payé" formControlName="status">
+              <span class="radio-label paid">Payé</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" value="Amicale" formControlName="status">
+              <span class="radio-label amicale">Amicale</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Remarque</label>
+          <input type="text" class="form-input" formControlName="remarque" placeholder="Ajouter une remarque (optionnel)">
+        </div>
+
+        <button type="submit" class="submit-btn">
+          <i class="fa-solid fa-check"></i>
+          Confirmer la réservation
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- User Reservation Details (reserve1) -->
+  <div *ngIf="reserve1" class="section-card">
+    <div class="reservation-details">
+      <div class="client-card">
+        <div class="client-avatar">
+          <i class="fa-solid fa-user"></i>
+        </div>
+        <div class="client-info">
+          <h3>{{users[0]?.user.firstName}} {{users[0]?.user.lastName}}</h3>
+          <p><i class="fa-solid fa-phone"></i> {{users[0]?.reser.ntel}}</p>
+          <p><i class="fa-regular fa-calendar"></i> Demande: {{users[0]?.reser.dateRes | date:'dd MMMM yyyy'}}</p>
+          <span class="status-badge" [ngClass]="users[0]?.reser.status">{{users[0]?.reser.status}}</span>
+        </div>
+      </div>
+
+      <form [formGroup]="modifForm" (ngSubmit)="modif()" class="edit-form">
+        <div class="form-group">
+          <label class="form-label">Modifier le statut</label>
+          <div class="radio-group">
+            <label class="radio-option">
+              <input type="radio" value="En cours" formControlName="status">
+              <span class="radio-label in-progress">En cours</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" value="Avance" formControlName="status">
+              <span class="radio-label avance">Avance</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" value="Payé" formControlName="status">
+              <span class="radio-label paid">Payé</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" value="Amicale" formControlName="status">
+              <span class="radio-label amicale">Amicale</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Remarque</label>
+          <input type="text" class="form-input" formControlName="remarque">
+        </div>
+
+        <div class="button-group">
+          <button type="submit" class="submit-btn success">
+            <i class="fa-solid fa-save"></i>
+            Modifier
+          </button>
+          <button type="button" class="submit-btn danger" (click)="annuler()">
+            <i class="fa-solid fa-times"></i>
+            Annuler
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Admin Reservation Details (adminres) -->
+  <div *ngIf="adminres" class="section-card">
+    <div class="reservation-details">
+      <p class="reserved-by">
+        <i class="fa-solid fa-user-check"></i>
+        Réservé par: <strong>{{user?.nom}}</strong>
+      </p>
+      
+      <form [formGroup]="modifFormAdmin" (ngSubmit)="modifadmin()" class="edit-form">
+        <div class="info-row">
+          <span class="info-label">Date Réservation:</span>
+          <span class="info-value">{{user?.dateRes | date:'dd/MM/yyyy'}}</span>
+        </div>
+        
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Prénom</label>
+            <input type="text" class="form-input" formControlName="firstName">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Nom</label>
+            <input type="text" class="form-input" formControlName="lastName">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Téléphone</label>
+            <input type="text" class="form-input" formControlName="ntel">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Statut</label>
+          <div class="radio-group">
+            <label class="radio-option">
+              <input type="radio" value="En cours" formControlName="status">
+              <span class="radio-label in-progress">En cours</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" value="Avance" formControlName="status">
+              <span class="radio-label avance">Avance</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" value="Payé" formControlName="status">
+              <span class="radio-label paid">Payé</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" value="Amicale" formControlName="status">
+              <span class="radio-label amicale">Amicale</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Remarque</label>
+          <input type="text" class="form-input" formControlName="remarque">
+        </div>
+
+        <div class="button-group">
+          <button type="submit" class="submit-btn success">
+            <i class="fa-solid fa-save"></i>
+            Modifier
+          </button>
+          <button type="button" class="submit-btn danger" (click)="annuler1()">
+            <i class="fa-solid fa-times"></i>
+            Annuler
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

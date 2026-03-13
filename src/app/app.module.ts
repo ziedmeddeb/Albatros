@@ -11,9 +11,6 @@ import { ListAppartsComponent } from './Components/user/list-apparts/list-appart
 import { AboutComponent } from './Components/user/about/about.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SelectedApartComponent } from './Components/user/selected-apart/selected-apart.component';
-
-import { RegisterComponent } from './Components/user/register/register.component';
-import { LoginComponent } from './Components/user/login/login.component';
 import { ErrorPageComponent } from './Components/user/error-page/error-page.component';
 import { ProfileComponent } from './Components/user/profile/profile.component';
 import { ChangePassComponent } from './Components/user/change-pass/change-pass.component';
@@ -22,7 +19,6 @@ import { AdminComponent } from './layouts/admin/admin.component';
 import { ListApartComponent } from './Components/admin/list-apart/list-apart.component';
 import { AdminSelectedApartComponent } from './Components/admin/admin-selected-apart/admin-selected-apart.component';
 import { ListReserComponent } from './Components/admin/list-reser/list-reser.component';
-import { RegisterColabComponent } from './Components/colab/register-colab/register-colab.component';
 import { LoginColabComponent } from './Components/colab/login-colab/login-colab.component';
 import { ListApartColabComponent } from './Components/colab/list-apart-colab/list-apart-colab.component';
 import { SelectedApartColabComponent } from './Components/colab/selected-apart-colab/selected-apart-colab.component';
@@ -42,8 +38,6 @@ import { CarouselModule } from 'primeng/carousel';
     ListAppartsComponent,
     AboutComponent,
     SelectedApartComponent,
-    RegisterComponent,
-    LoginComponent,
     ErrorPageComponent,
     ProfileComponent,
     ChangePassComponent,
@@ -52,7 +46,6 @@ import { CarouselModule } from 'primeng/carousel';
     ListApartComponent,
     AdminSelectedApartComponent,
     ListReserComponent,
-    RegisterColabComponent,
     LoginColabComponent,
     ListApartColabComponent,
     SelectedApartColabComponent,

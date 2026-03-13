@@ -1,7 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { JwtHelperService } from '@auth0/angular-jwt';
 import { Appartements } from 'src/app/entities/appartements';
 import { Calendrier } from 'src/app/entities/calendrier';
 import { Image } from 'src/app/entities/image';
@@ -9,13 +8,10 @@ import { AppartementService } from 'src/app/services/appartement.service';
 import { CalendrierService } from 'src/app/services/calendrier.service';
 import { ImageService } from 'src/app/services/image.service';
 import { ReserveService } from 'src/app/services/reserve.service';
-import { UserService } from 'src/app/services/user.service';
 import { CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import { an } from '@fullcalendar/core/internal-common';
 import multiMonthPlugin from '@fullcalendar/multimonth';
 import listPlugin from '@fullcalendar/list';
-import { all } from 'axios';
 // import frLocale from "@fullcalendar/core/locales/fr";
 @Component({
   selector: 'app-selected-apart',
@@ -29,10 +25,8 @@ export class SelectedApartComponent implements OnInit {
   calender!:Calendrier;
   showForm=false;
   selectedCell: any;
-  reservForm!:FormGroup;
-  jwt=new JwtHelperService();
+  demandForm!:FormGroup;
   selectedBox!: HTMLElement;
-  user!:any;
   events:any[]=[];
   selectedDate!:any;  
   selectedDateDeb!:any; 
@@ -43,8 +37,12 @@ export class SelectedApartComponent implements OnInit {
     private reserveService:ReserveService,
     private fb:FormBuilder,
     private router:Router,
-    private userService:UserService,
-    private cdr:ChangeDetectorRef) { }
+    private cdr:ChangeDetectorRef) {
+      this.demandForm = this.fb.group({
+        nom: ['', Validators.required],
+        ntel: ['', Validators.required]
+      });
+    }
     calendarOptions: CalendarOptions = {
       height: 'auto', // Adjust the height based on the content
       
@@ -160,41 +158,29 @@ export class SelectedApartComponent implements OnInit {
     
   }
   
-  reserver()
-  {
-    if(localStorage.getItem('userToken')!=null)
-    {
+  envoyerDemande() {
+    if (this.demandForm.valid) {
+      const demande = {
+        nom: this.demandForm.value.nom,
+        ntel: this.demandForm.value.ntel,
+        dateRes: new Date(Date.now()),
+        date: this.selectedDateDeb,
+        code: this.Apart.code,
+        appartement: this.idAp
+      };
       
-        
-         
-          this.userService.getUserById(this.jwt.decodeToken(localStorage.getItem('userToken')!)['_id']).subscribe(data=>{
-            this.user=data;
-          
-      this.reserveService.createReserve({
-        firstName:this.user.firstName,lastName:this.user.lastName,
-        dateRes:new Date(Date.now()),ntel:this.user.ntel,
-        date:this.selectedDateDeb,
-        code:this.Apart.code,
-        appartement:this.idAp,user:this.jwt.decodeToken(localStorage.getItem('userToken')!)['_id']}).subscribe(data=>{
-        
-          alert("demande de reservation a été envoyé avec succès");
-          
+      this.reserveService.createReserve(demande).subscribe(
+        data => {
+          alert("Votre demande de réservation a été envoyée avec succès. Nous vous contacterons bientôt.");
+          this.showForm = false;
+          this.demandForm.reset();
         },
-        (error)=>{
-          console.log("error");
+        error => {
+          console.log("error", error);
+          alert("Une erreur s'est produite. Veuillez réessayer.");
         }
-        );
-      },
-      (error)=>{
-        console.log("error");
-      
-      });
-      
-      }
-      else{
-        this.router.navigate(['/login']);
-      }
-
+      );
+    }
   }
 
   onBoxClick(event: Event) {

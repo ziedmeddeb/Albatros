@@ -1,168 +1,144 @@
-<br>
-<i class="fa-solid fa-arrow-left fa-xl" routerLink="/colabdash" style="position: relative;left: 20px;cursor: pointer;"></i>
-<h1 style="text-align: center;margin: 5%;">{{cod}} : {{datede | date:'dd/MM'}} au {{dateFin | date:'dd/MM'}}</h1>
-<div
-  class="formbold-main-wrapper"
-  style="margin-top: 0% !important; width: 97% !important"
-  *ngIf="showForm"
->
-  <!-- Author: FormBold Team -->
-  <!-- Learn More: https://formbold.com -->
-  <div class="formbold-form-wrapper">
-    <form  [formGroup]="reservForm" (ngSubmit)="reser()">
-      <div class="formbold-form-title">
-        <h2 class="">Réserver</h2>
-        <p> </p>
+<div class="detail-container">
+  <!-- Back Button & Header -->
+  <div class="detail-header">
+    <button class="back-btn" routerLink="/colabdash">
+      <i class="fa-solid fa-arrow-left"></i>
+      Retour
+    </button>
+    <div class="header-info">
+      <h1 class="page-title">{{cod}}</h1>
+      <span class="date-badge">
+        <i class="fa-regular fa-calendar"></i>
+        {{datede | date:'dd/MM'}} au {{dateFin | date:'dd/MM'}}
+      </span>
+    </div>
+  </div>
+
+  <!-- New Reservation Form -->
+  <div class="section-card" *ngIf="showForm">
+    <h2 class="section-title">
+      <i class="fa-solid fa-calendar-plus"></i>
+      Nouvelle Réservation
+    </h2>
+    
+    <form [formGroup]="reservForm" (ngSubmit)="reser()" class="reservation-form">
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Prénom</label>
+          <input type="text" class="form-input" formControlName="firstName" placeholder="Entrez le prénom">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Nom</label>
+          <input type="text" class="form-input" formControlName="lastName" placeholder="Entrez le nom">
+        </div>
+        <div class="form-group">
+          <label class="form-label">CIN</label>
+          <input type="text" class="form-input" formControlName="cin" placeholder="Numéro CIN">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Téléphone</label>
+          <input type="text" class="form-input" formControlName="ntel" placeholder="Numéro de téléphone">
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label class="form-label">Statut</label>
+        <div class="radio-group">
+          <label class="radio-option">
+            <input type="radio" value="En cours" formControlName="status">
+            <span class="radio-label in-progress">En cours</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" value="Avance" formControlName="status">
+            <span class="radio-label avance">Avance</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" value="Payé" formControlName="status">
+            <span class="radio-label paid">Payé</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" value="Amicale" formControlName="status">
+            <span class="radio-label amicale">Amicale</span>
+          </label>
+        </div>
       </div>
 
-      
-        
-        <label for="address" class="formbold-form-label">Prénom </label>
-        <input
-          type="text"
-          name="address"
-          id="address"
-          
-          formControlName="firstName"
-          
-        />
-      
+      <div class="form-group">
+        <label class="form-label">Remarque</label>
+        <input type="text" class="form-input" formControlName="remarque" placeholder="Ajouter une remarque (optionnel)">
+      </div>
 
-      
-        
-        <label for="address" class="formbold-form-label">Nom </label>
-        <input
-          type="text"
-          name="address"
-          id="address"
-          
-          formControlName="lastName"
-          
-        />
-      
-
-      
-
-      
-        
-        <label for="address" class="formbold-form-label">CIN </label>
-        <input
-          type="text"
-          name="address"
-          id="address"
-          
-          formControlName="cin"
-          
-        />
-      
-
-      
-        
-        <label for="address" class="formbold-form-label">N° Telephone </label>
-        <input
-          type="text"
-          name="address"
-          id="address"
-          
-          formControlName="ntel"
-          
-        />
-      
-        
-        
-      
-
-      
-        
-        <label for="address" class="formbold-form-label">Etat </label>
-        <label>
-          <input name="status" type="radio" value="Amicale" formControlName="status">
-          Amicale
-        </label>
-      
-        <label>
-          <input name="status" type="radio" value="Avance" formControlName="status">
-          Avance
-        </label>
-      
-        <label>
-          <input name="status" type="radio" value="Payé" formControlName="status">
-          Payé
-        </label>
-
-        <label>
-          <input name="status" type="radio" value="En cours" formControlName="status">
-          En cours
-        </label>
-      
-        <br>
-        <label for="remarque">Remarque: </label>
-        <input type="text" formControlName="remarque">
-        
-      
-        <br>
-
-      <button
-        class="formbold-btn"
-        type="submit"
-        style="background-color: rgb(147, 147, 255)"
-      >
-        Confirm
+      <button type="submit" class="submit-btn">
+        <i class="fa-solid fa-check"></i>
+        Confirmer la réservation
       </button>
     </form>
   </div>
-</div>
 
-<div *ngIf="adminres">
-    <h1 style="text-align: center;margin: 5%;">Reservé pour  </h1>
-    <form [formGroup]="modifFormAdmin" (ngSubmit)="modifadmin()">
-      <table>
-        
-        <tr>
-          <td>Prénom:</td>
-          <td><input type="text" formControlName="firstName"></td>
-        </tr>
-        <tr>
-          <td>Nom:</td>
-          <td><input type="text" formControlName="lastName"></td>
-        </tr>
-        <tr>
-          <td>Cin:</td>
-          <td><input type="text" formControlName="cin"></td>
-        </tr>
-        <tr>
-          <td>Téléphone:</td>
-          <td><input type="text" formControlName="ntel"></td>
-        </tr>
-
-        
-      </table>
+  <!-- Existing Reservation Details -->
+  <div *ngIf="adminres" class="section-card">
+    <h2 class="section-title">
+      <i class="fa-solid fa-user-check"></i>
+      Détails de la Réservation
+    </h2>
     
-      <label for="status">Etat: </label>
-      <label>
-        <input type="radio" name="status" value="Amicale" formControlName="status"> Amicale
-      </label>
-      <label>
-        <input type="radio" name="status" value="Avance" formControlName="status"> Avance
-      </label>
-      <label>
-        <input type="radio" name="status" value="Payé" formControlName="status"> Payé
-      </label>
-      <label>
-        <input type="radio" name="status" value="En cours" formControlName="status"> En cours
-      </label>
-      
-      <br>
-      <label for="remarque">Remarque: </label>
-      <input type="text" formControlName="remarque">
-    <br>
-      <button type="submit" class="btn btn-success">Modifier</button>
-    </form>
-    
-    
-            
-            <br>
-            <button type="button" class="btn btn-danger" (click)="annuler1()">Annuler</button>
-           
-            
+    <form [formGroup]="modifFormAdmin" (ngSubmit)="modifadmin()" class="reservation-form">
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Prénom</label>
+          <input type="text" class="form-input" formControlName="firstName">
         </div>
+        <div class="form-group">
+          <label class="form-label">Nom</label>
+          <input type="text" class="form-input" formControlName="lastName">
+        </div>
+        <div class="form-group">
+          <label class="form-label">CIN</label>
+          <input type="text" class="form-input" formControlName="cin">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Téléphone</label>
+          <input type="text" class="form-input" formControlName="ntel">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Statut</label>
+        <div class="radio-group">
+          <label class="radio-option">
+            <input type="radio" value="En cours" formControlName="status">
+            <span class="radio-label in-progress">En cours</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" value="Avance" formControlName="status">
+            <span class="radio-label avance">Avance</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" value="Payé" formControlName="status">
+            <span class="radio-label paid">Payé</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" value="Amicale" formControlName="status">
+            <span class="radio-label amicale">Amicale</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Remarque</label>
+        <input type="text" class="form-input" formControlName="remarque">
+      </div>
+
+      <div class="button-group">
+        <button type="submit" class="submit-btn success">
+          <i class="fa-solid fa-save"></i>
+          Modifier
+        </button>
+        <button type="button" class="submit-btn danger" (click)="annuler1()">
+          <i class="fa-solid fa-times"></i>
+          Annuler la réservation
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

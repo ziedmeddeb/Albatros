@@ -1,32 +1,53 @@
-
-<h1 style="margin-bottom: 20px;;">Reservations du {{dateDeb |date:'dd-MM'}} au {{dateFin |date:'dd-MM'}} </h1>
-<br>
-<div class="table-responsive">
-<table class="table">
-    <thead>
-      <tr>
-        <th>Firstname</th>
-        <th>Lastname</th>
-        <th>Cin</th>
-        
-        <th>Telephone</th>
-        <th>Region</th>
-        <th>Status</th>
-        <th>Réservé par</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let r of listReserv">
-        <td>{{r.firstName}}</td>
-        <td>{{r.lastName}}</td>
-        <td>{{r.cin}}</td>
-        
-        <td>{{r.ntel}}</td>
-        <td>{{r.region}}</td>
-        <td>{{r.status}}</td>
-        <td>{{r.nom}}</td>
-      </tr>
-      
-    </tbody>
-  </table>
+<div class="reservations-container">
+  <div class="page-header">
+    <h1 class="page-title">
+      <i class="fa-solid fa-list-check"></i>
+      Réservations
+    </h1>
+    <span class="date-badge">
+      <i class="fa-regular fa-calendar"></i>
+      {{dateDeb | date:'dd/MM'}} au {{dateFin | date:'dd/MM'}}
+    </span>
   </div>
+
+  <div class="table-card">
+    <div class="table-responsive">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Prénom</th>
+            <th>Nom</th>
+            <th>CIN</th>
+            <th>Téléphone</th>
+            <th>Région</th>
+            <th>Statut</th>
+            <th>Réservé par</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let r of listReserv">
+            <td>{{r.firstName}}</td>
+            <td>{{r.lastName}}</td>
+            <td>{{r.cin}}</td>
+            <td>{{r.ntel}}</td>
+            <td>{{r.region}}</td>
+            <td>
+              <span class="status-badge" [ngClass]="{
+                'in-progress': r.status === 'En cours',
+                'paid': r.status === 'Payé',
+                'avance': r.status === 'Avance',
+                'amicale': r.status === 'Amicale'
+              }">{{r.status}}</span>
+            </td>
+            <td>{{r.nom}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div *ngIf="listReserv?.length === 0" class="empty-state">
+      <i class="fa-regular fa-folder-open"></i>
+      <p>Aucune réservation pour cette période</p>
+    </div>
+  </div>
+</div>

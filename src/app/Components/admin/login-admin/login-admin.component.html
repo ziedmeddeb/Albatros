@@ -1,45 +1,47 @@
-<!-- Section: Design Block -->
-<section class="text-center text-lg-start" style="margin-top: 40px;">
-    <!-- Jumbotron -->
-    <div class="container py-4">
-      <div class="row g-0 align-items-center">
-        <div class="col-lg-6 mb-5 mb-lg-0">
-          <div class="card bg-transparent">
-            <div class="card-body p-5 shadow-5 text-center">
-              <h2 class="fw-bold mb-5">S'authentifier Admin</h2>
-              <form [formGroup]="adminForm" (ngSubmit)="log()">
-                <!-- Email input -->
-                <div class="form-outline mb-4">
-                  <label class="form-label" for="form3Example3">Identifiant</label>
-                  <input type="email" id="form3Example3" class="form-control" formControlName="identifiant" />
-                  
-                </div>
-  
-                <!-- Password input -->
-                <div class="form-outline mb-4">
-                  <label class="form-label" for="form3Example4">Password</label>
-                  <input type="password" id="form3Example4" class="form-control" formControlName="password" />
-                  
-                </div>
-  
-                <!-- Submit button -->
-                <button type="submit" class="btn btn-primary btn-block mb-4">
-                  S'authentifier
-                </button>
-  
-                <!-- Register buttons -->
-                
-              </form>
-            </div>
-          </div>
+<div class="login-wrapper">
+  <div class="login-container">
+    <div class="login-card">
+      <div class="login-header">
+        <div class="logo-icon">
+          <i class="fa-solid fa-shield-halved"></i>
         </div>
-  
-        <div class="col-lg-6 mb-5 mb-lg-0">
-          <img src="../../../../assets/images/albatros.jpeg" class="img-fluid rounded-4 shadow-4" alt="" />
+        <h2>Espace Administrateur</h2>
+        <p>Connectez-vous pour accéder au tableau de bord</p>
+      </div>
+      
+      <form [formGroup]="adminForm" (ngSubmit)="log()" class="login-form">
+        <div class="form-group">
+          <label class="form-label">
+            <i class="fa-solid fa-user"></i>
+            Identifiant
+          </label>
+          <input type="text" class="form-input" formControlName="identifiant" 
+                 placeholder="Entrez votre identifiant" />
         </div>
+
+        <div class="form-group">
+          <label class="form-label">
+            <i class="fa-solid fa-lock"></i>
+            Mot de passe
+          </label>
+          <input type="password" class="form-input" formControlName="password" 
+                 placeholder="Entrez votre mot de passe" />
+        </div>
+
+        <button type="submit" class="login-btn">
+          <span>Se connecter</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </form>
+    </div>
+    
+    <div class="login-image">
+      <img src="../../../../assets/images/albatros.jpeg" alt="Albatros" />
+      <div class="image-overlay">
+        <h3>Résidence Albatros</h3>
+        <p>Gestion simplifiée de vos réservations</p>
       </div>
     </div>
-    <!-- Jumbotron -->
-  </section>
-  <!-- Section: Design Block -->
+  </div>
+</div>
   

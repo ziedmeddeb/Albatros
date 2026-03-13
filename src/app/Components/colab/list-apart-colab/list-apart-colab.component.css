@@ -1,121 +1,279 @@
-.available {
-  background-color: #76F467;
+/* Dashboard Container */
+.dashboard-container {
+  padding: 20px;
+  max-width: 100%;
+  min-height: 100vh;
+  background: #f8fafc;
 }
 
-.not-available {
-  background-color: #F94C46;
+/* Header Section */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
-.tableReserv {
-  margin-top: 60px;
-  margin-bottom: 20px;
+.page-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1b262c;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
 }
 
-.paid {
-  background-color: rgb(190, 61, 61);
-    color:white
+.page-title i {
+  color: #3282b8;
 }
 
-.in-progress {
-  background-color: orange;
+.user-menu {
+  display: flex;
+  gap: 10px;
 }
 
-.amicale {
-  background-color: rgb(37, 32, 32);
-  color:white
+.user-btn {
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
 }
 
-.avance {
-  background-color: cyan;
+.user-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3);
 }
 
-.not-mine {
-  pointer-events: none;
-  color: transparent;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+/* Legend Card */
+.legend-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px 25px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
-.green {
-  background-color: #76F467;
-  width: 30px;
-  height: 30px;
-  margin: 10px;
+.legend-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 15px;
 }
 
-.red {
-  background-color: rgb(190, 61, 61);
-  width: 30px;
-  height: 30px;
-  margin-left: 20px;
-  margin-right: 10px;
-}
-
-.cyan {
-  background-color: cyan;
-  width: 30px;
-  height: 30px;
-  margin-left: 20px;
-  margin-right: 10px;
-}
-
-.orange {
-  background-color: orange;
-  width: 30px;
-  height: 30px;
-  margin-left: 20px;
-  margin-right: 10px;
-}
-
-.black {
-  background-color: rgb(37, 32, 32);
-  width: 30px;
-  height: 30px;
-  margin-left: 20px;
-  margin-right: 10px;
-}
-.green,
-.red,
-.cyan,
-.orange,
-.black {
-  width: 50px;
-  padding-top: 10px; /* Adjust the padding-top value as desired */
-  margin: 5px;
-}
-
-.legende {
+.legend-items {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  margin-top: 60px;
+  gap: 20px;
 }
 
 .legend-item {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  gap: 8px;
 }
 
-.legend-item div {
-  width: 30px;
-  height: 30px;
-  margin-right: 5px;
+.legend-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
 }
 
-.legend-item span {
-  font-size: 12px;
+.legend-dot.available { background-color: #22c55e; }
+.legend-dot.in-progress { background-color: #f59e0b; }
+.legend-dot.paid { background-color: #ef4444; }
+.legend-dot.avance { background-color: #06b6d4; }
+.legend-dot.amicale { background-color: #1f2937; }
+
+.legend-text {
+  font-size: 14px;
+  color: #6b7280;
+  font-weight: 500;
 }
 
-/* Media Query for small screens */
-@media (max-width: 150px) {
+/* Table Card */
+.table-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 5px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 14px;
+}
+
+.data-table thead th {
+  background: #f8fafc;
+  padding: 16px 12px;
+  font-weight: 600;
+  color: #374151;
+  text-align: center;
+  white-space: nowrap;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.date-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.date-range {
+  font-size: 13px;
+}
+
+.date-separator {
+  font-size: 10px;
+  color: #9ca3af;
+}
+
+.data-table tbody tr {
+  transition: background 0.2s;
+}
+
+.data-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.data-table tbody td {
+  padding: 14px 12px;
+  border-bottom: 1px solid #f1f5f9;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.apartment-code {
+  font-weight: 700;
+  color: #1b262c;
+  background: #dbeafe;
+  padding: 6px 12px;
+  border-radius: 6px;
+  display: inline-block;
+}
+
+.apartment-desc {
+  color: #6b7280;
+  font-size: 13px;
+}
+
+/* Status Cells */
+.status-cell {
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s;
+  min-width: 100px;
+}
+
+.status-cell:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.status-cell.available {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  color: #fff;
+}
+
+.status-cell.in-progress {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: #fff;
+}
+
+.status-cell.paid {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: #fff;
+}
+
+.status-cell.avance {
+  background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+  color: #fff;
+}
+
+.status-cell.amicale {
+  background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+  color: #fff;
+}
+
+.status-cell.not-mine {
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+.status-cell.not-mine .cell-content {
+  visibility: hidden;
+}
+
+.cell-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-weight: 500;
+}
+
+.price-only {
+  font-weight: 600;
+}
+
+/* Sticky Columns */
+.sticky-col {
+  position: sticky;
+  background: #fff;
+  z-index: 1;
+}
+
+.code-col {
+  left: 0;
+  min-width: 80px;
+}
+
+.desc-col {
+  left: 80px;
+  min-width: 150px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .page-title {
+    font-size: 22px;
+  }
+  
+  .legend-items {
+    gap: 12px;
+  }
+  
   .legend-item {
-    flex-basis: 50%;
-    margin-bottom: 5px;
+    flex: 0 0 45%;
+  }
+  
+  .sticky-col {
+    position: relative;
+    left: 0 !important;
   }
 }
 

@@ -5,8 +5,6 @@ import { AboutComponent } from './Components/user/about/about.component';
 import { ContactComponent } from './Components/user/contact/contact.component';
 import { ListAppartsComponent } from './Components/user/list-apparts/list-apparts.component';
 import { SelectedApartComponent } from './Components/user/selected-apart/selected-apart.component';
-import { LoginComponent } from './Components/user/login/login.component';
-import { RegisterComponent } from './Components/user/register/register.component';
 import { UserComponent } from './layouts/user/user.component';
 import { ProfileComponent } from './Components/user/profile/profile.component';
 import { ChangePassComponent } from './Components/user/change-pass/change-pass.component';
@@ -16,7 +14,6 @@ import { ListApartComponent } from './Components/admin/list-apart/list-apart.com
 import { AdminSelectedApartComponent } from './Components/admin/admin-selected-apart/admin-selected-apart.component';
 import { ListReserComponent } from './Components/admin/list-reser/list-reser.component';
 import { LoginColabComponent } from './Components/colab/login-colab/login-colab.component';
-import { RegisterColabComponent } from './Components/colab/register-colab/register-colab.component';
 import { ListApartColabComponent } from './Components/colab/list-apart-colab/list-apart-colab.component';
 import { SelectedApartColabComponent } from './Components/colab/selected-apart-colab/selected-apart-colab.component';
 import { SiteArchComponent } from './Components/user/site-arch/site-arch.component';
@@ -39,8 +36,6 @@ const routes: Routes = [
   ]},
  
   
-  {path:'login',component:LoginComponent,title:'Login'},
-  {path:'register',component:RegisterComponent,title:'Register'},
   {path:'profile',component:ProfileComponent,title:'Profile'},
   {path:'changePass',component:ChangePassComponent,title:'Changer mot de passe'},
   {path:'adminlog',component:LoginAdminComponent,title:'Admin'},
@@ -58,7 +53,6 @@ const routes: Routes = [
 
 
 {path:'colabLogin',component:LoginColabComponent,title:'Login'},
-{path:'colabRegister',component:RegisterColabComponent,title:'Register'},
 {path:'colabdash',component:ListApartColabComponent,title:'Colaborateur Dashboard'},
 {path:'colabApart/:id/:calender/:idCal/:dateFin/:cod',component:SelectedApartColabComponent,title:'Appartement'},
 {path:'**',redirectTo:'home',pathMatch:'full'}

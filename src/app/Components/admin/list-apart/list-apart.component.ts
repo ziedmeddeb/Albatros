@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Appartements } from 'src/app/entities/appartements';
 import { AppartementService } from 'src/app/services/appartement.service';
 import { CalendrierService } from 'src/app/services/calendrier.service';
+import { ColabServiceService } from 'src/app/services/colab-service.service';
 import { SwPush } from '@angular/service-worker';
 import { NotificationService } from 'src/app/services/notification.service';
 import { CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import { an } from '@fullcalendar/core/internal-common';
 
 
 @Component({
@@ -19,10 +20,21 @@ export class ListApartComponent implements OnInit {
  Aparts!:Appartements[];
  calenders:any[]=[];
  availabilities:any[]=[];
+ showColabModal = false;
+ colabForm!: FormGroup;
   constructor(private calenderService:CalendrierService,private appartService:AppartementService,
     private router:Router,
       private _swPush:SwPush,
-      private notifService:NotificationService) { }
+      private notifService:NotificationService,
+      private colabService: ColabServiceService,
+      private fb: FormBuilder) {
+        this.colabForm = this.fb.group({
+          firstName: ['', Validators.required],
+          lastName: ['', Validators.required],
+          identifiant: ['', Validators.required],
+          password: ['', [Validators.required, Validators.minLength(4)]]
+        });
+      }
 
       calendarOptions: CalendarOptions = {
 
@@ -104,6 +116,28 @@ export class ListApartComponent implements OnInit {
     }).catch((_) => console.log);
   };
 
-  
+  openColabModal() {
+    this.showColabModal = true;
+  }
+
+  closeColabModal() {
+    this.showColabModal = false;
+    this.colabForm.reset();
+  }
+
+  createColab() {
+    if (this.colabForm.valid) {
+      this.colabService.register(this.colabForm.value).subscribe(
+        data => {
+          alert('Collaborateur créé avec succès!');
+          this.closeColabModal();
+        },
+        error => {
+          console.error('Error creating colab:', error);
+          alert('Erreur lors de la création du collaborateur.');
+        }
+      );
+    }
+  }
 
 }

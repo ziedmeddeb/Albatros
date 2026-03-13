@@ -6,6 +6,7 @@ export class Reserve {
         public date:Date,
         public dateRes:Date,
         public ntel:string,
+        public cin:string,
         public remarque:string,
         public status:string,
         public nom:string
