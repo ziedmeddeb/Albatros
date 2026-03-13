@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-const url="http://albatros-backend.onrender.com/api/admin/"
+const url="https://albatros-back.onrender.com/api/admin/"
 @Injectable({
   providedIn: 'root'
 })

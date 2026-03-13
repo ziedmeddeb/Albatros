@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Calendrier } from '../entities/calendrier';
-const url="http://albatros-backend.onrender.com/api/calendrier/"
+const url="https://albatros-back.onrender.com/api/calendrier/"
 @Injectable({
   providedIn: 'root'
 })
